@@ -20,11 +20,11 @@ Component Streaming was done using Suspense and loading skeletons were added whe
 ## How To Run Locally
 First, clone the repo to your local machine:
 ```
-git clone https://github.com/mohamedzeina/snippets-nextjs.git
+git clone https://github.com/mohamedzeina/discuss-nextjs.git
 ```
-Then, open up a terminal in the project's directory and install next by running the following command:
+Then, open up a terminal in the project's directory and install dependencies using the following command:
 ```
-npm install next
+npm install
 ```
 Then, open a terminal in the local repo and run the development server:
 
