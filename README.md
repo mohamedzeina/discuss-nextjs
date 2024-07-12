@@ -1,32 +1,38 @@
 ## Description
-Discuss is an application that is done using NextJS. It mimics the features of a social media discussion website. 
+Discuss is a Next.js application that replicates the features of a social media discussion website. It allows users to:
 
-The application allows the user to:
-1) Sign In / Sign Out using GitHub OAuth
-2) View Top Posts
-3) Create New Topic
-4) Create New Post For a Specific Topic
-5) Reply to Posts by Adding Comments
-6) Reply to Other Comments
-7) Search for Posts Using the Search Bar
+* Sign in and out using GitHub OAuth.
+* View top posts.
+* Create new topics.
+* Create new posts within specific topics.
+* Reply to posts by adding comments.
+* Reply to other comments.
+* Search for posts using a search bar.
 
-Authentication was handled using Next-Auth  
-Next-UI was used for the styling of the application  
-Zod was used to validate user inputs to forms   
-Request Memoization was used to dedupliate some database queries  
-Caching optimizations were done using revalidatePath (on demand caching) as different behavior of the application was observed between the development version and the production version  
-Component Streaming was done using Suspense and loading skeletons were added where component streaming is being performed  
+
+Key features and technologies used in the application include:
+
+* Authentication: Handled using NextAuth.
+* Styling: Implemented with Next-UI.
+* Form Validation: Managed using Zod.
+* Request Memoization: Employed to deduplicate certain database queries.
+* Caching Optimizations: Achieved with revalidatePath for on-demand caching, addressing different behaviors between development and production environments.
+* Component Streaming: Implemented using Suspense with loading skeletons to enhance user experience during component streaming.
 
 ## How To Run Locally
 First, clone the repo to your local machine:
 ```
 git clone https://github.com/mohamedzeina/discuss-nextjs.git
 ```
-Then, open up a terminal in the project's directory and install dependencies using the following command:
+Then move into the project's directory:
+```
+cd discuss-nextjs
+```
+Then, install dependencies using the following command:
 ```
 npm install
 ```
-Then, open a terminal in the local repo and run the development server:
+Then, run the development server:
 
 ```bash
 npm run dev
