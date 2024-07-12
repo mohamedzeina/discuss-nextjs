@@ -16,8 +16,8 @@ Key features and technologies used in the application include:
 * Styling: Implemented with Next-UI.
 * Form Validation: Managed using Zod.
 * Request Memoization: Employed to deduplicate certain database queries.
-* Caching Optimizations: Achieved with revalidatePath for on-demand caching, addressing different behaviors between development and production environments.
-* Component Streaming: Implemented using Suspense with loading skeletons to enhance user experience during component streaming.
+* Caching Optimizations: Achieved with `revalidatePath` for on-demand caching, addressing different behaviors between development and production environments.
+* Component Streaming: Implemented using `Suspense` with loading skeletons to enhance user experience during component streaming.
 
 ## How To Run Locally
 First, clone the repo to your local machine:
