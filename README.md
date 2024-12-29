@@ -7,7 +7,8 @@ Welcome to the **Discuss NextJS** repository! It is a web application that repli
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
+- [Prerequisites](#architecture)
+- [Obtaining GitHub OAuth Credentials](#Oauth)
 - [Installation](#installation)
 
 ## Features
@@ -28,12 +29,12 @@ Welcome to the **Discuss NextJS** repository! It is a web application that repli
 * Caching Optimizations: Achieved with `revalidatePath` for on-demand caching, addressing different behaviors between development and production environments.
 * Component Streaming: Implemented using `Suspense` with loading skeletons to enhance user experience during component streaming.
 
-### Prerequisites
+## Prerequisites
 
 - **Node.js**: Ensure you have Node.js installed. Download it from [Node.js Official Website](https://nodejs.org/).
 - **GitHub OAuth App**: Create a GitHub OAuth application to enable user authentication. (Details below)
 
-### Obtaining GitHub OAuth Credentials
+## Obtaining GitHub OAuth Credentials
 
 Follow these steps to obtain your GitHub OAuth credentials:
 
