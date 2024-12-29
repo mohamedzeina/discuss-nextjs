@@ -7,8 +7,8 @@ Welcome to the **Discuss NextJS** repository! It is a web application that repli
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Prerequisites](#architecture)
-- [Obtaining GitHub OAuth Credentials](#Oauth)
+- [Prerequisites](#Prerequisites)
+- [Obtaining GitHub OAuth Credentials](#Obtaining-GitHub-OAuth-Credentials)
 - [Installation](#installation)
 
 ## Features
