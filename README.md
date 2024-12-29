@@ -1,27 +1,38 @@
 ## Description
+Discuss is a Next.js application that replicates the features of a social media discussion website. It allows users to:
 
-1) 
-2) 
+* Sign in and out using GitHub OAuth.
+* View top posts.
+* Create new topics.
+* Create new posts within specific topics.
+* Reply to posts by adding comments.
+* Reply to other comments.
+* Search for posts using a search bar.
 
-The application allows the user to:
-1) 
-2) 
-3) 
-4) 
-5) 
 
-Caching optimizations were done using revalidatePath (on demand caching) as different behavior of the application was observed between the development version and the production version
+Key features and technologies used in the application include:
+
+* Authentication: Handled using NextAuth.
+* Styling: Implemented with Next-UI.
+* Form Validation: Managed using Zod.
+* Request Memoization: Employed to deduplicate certain database queries.
+* Caching Optimizations: Achieved with `revalidatePath` for on-demand caching, addressing different behaviors between development and production environments.
+* Component Streaming: Implemented using `Suspense` with loading skeletons to enhance user experience during component streaming.
 
 ## How To Run Locally
 First, clone the repo to your local machine:
 ```
-git clone https://github.com/mohamedzeina/snippets-nextjs.git
+git clone https://github.com/mohamedzeina/discuss-nextjs.git
 ```
-Then, open up a terminal in the project's directory and install next by running the following command:
+Then move into the project's directory:
 ```
-npm install next
+cd discuss-nextjs
 ```
-Then, open a terminal in the local repo and run the development server:
+Then, install dependencies using the following command:
+```
+npm install
+```
+Then, run the development server:
 
 ```bash
 npm run dev
