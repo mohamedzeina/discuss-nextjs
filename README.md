@@ -69,7 +69,7 @@ Follow these steps to obtain your GitHub OAuth credentials:
    npm install
    ```
 3. Set up your environment variables in a .env.local file:
-   ```makefile
+   ```makefile env
    GITHUB_CLIENT_ID=<your_github_client_id>
    GITHUB_CLIENT_SECRET=<your_github_client_secret>
    AUTH_SECRET=<random_characters>
