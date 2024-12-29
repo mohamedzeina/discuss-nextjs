@@ -1,16 +1,25 @@
-## Description
-Discuss is a Next.js application that replicates the features of a social media discussion website. It allows users to:
+# Discuss NextJS
 
-* Sign in and out using GitHub OAuth.
-* View top posts.
-* Create new topics.
-* Create new posts within specific topics.
-* Reply to posts by adding comments.
-* Reply to other comments.
-* Search for posts using a search bar.
+Welcome to the **Discuss NextJS** repository! It is a web application that replicates the features of a social media discussion platform. It enables users to create, engage in, and explore discussions, making it a great tool for collaborative knowledge sharing and community interaction.
 
 
-Key features and technologies used in the application include:
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Installation](#installation)
+
+## Features
+
+- **GitHub OAuth Authentication**: Secure user authentication with GitHub.
+- **Discussion Threads**: Create, reply to, and manage discussion threads.
+- **Search Functionality**: Quickly find discussions by keywords.
+- **Responsive Design**: Optimized for a seamless user experience on all devices.
+- **User-friendly Interface**: Intuitive design for easy navigation and participation.
+
+
+## Tech Stack
 
 * Authentication: Handled using NextAuth.
 * Styling: Implemented with Next-UI.
@@ -19,6 +28,10 @@ Key features and technologies used in the application include:
 * Caching Optimizations: Achieved with `revalidatePath` for on-demand caching, addressing different behaviors between development and production environments.
 * Component Streaming: Implemented using `Suspense` with loading skeletons to enhance user experience during component streaming.
 
+### Prerequisites
+
+- **Node.js**: Ensure you have Node.js installed. Download it from [Node.js Official Website](https://nodejs.org/).
+- **GitHub OAuth App**: Create a GitHub OAuth application to enable user authentication. (Details below)
 
 ### Obtaining GitHub OAuth Credentials
 
@@ -42,8 +55,6 @@ Follow these steps to obtain your GitHub OAuth credentials:
    GITHUB_CLIENT_ID=your_github_client_id
    GITHUB_CLIENT_SECRET=your_github_client_secret
    ```
-
-
 
 ## Installation
 
