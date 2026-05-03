@@ -1,5 +1,7 @@
 # Discuss
 
+**Live:** [discuss-nextjs-drab.vercel.app](https://discuss-nextjs-drab.vercel.app)
+
 A Reddit-style discussion platform where users can create topics, post threads, and reply to comments — built with Next.js 14 using the App Router.
 
 ## Features
@@ -19,7 +21,7 @@ A Reddit-style discussion platform where users can create topics, post threads, 
 |---|---|
 | Framework | Next.js 14 (App Router) |
 | Language | TypeScript |
-| Database | SQLite via Prisma ORM |
+| Database | PostgreSQL (Neon) via Prisma ORM |
 | Auth | NextAuth v5 + GitHub OAuth |
 | UI | NextUI + Tailwind CSS |
 | Validation | Zod |
@@ -48,7 +50,7 @@ A Reddit-style discussion platform where users can create topics, post threads, 
    GITHUB_CLIENT_ID=your_github_client_id
    GITHUB_CLIENT_SECRET=your_github_client_secret
    AUTH_SECRET=a_random_secret_string
-   DATABASE_URL="file:./dev.db"
+   DATABASE_URL="your_postgresql_connection_string"
    ```
 
 3. Set up the database:
