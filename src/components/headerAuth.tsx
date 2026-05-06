@@ -9,9 +9,11 @@ import {
   PopoverContent,
 } from '@nextui-org/react';
 import { useSession, signOut, signIn } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 
 export default function HeaderAuth() {
   const session = useSession();
+  const pathname = usePathname();
 
   let authContent: React.ReactNode;
   if (session.status === 'loading') {
@@ -50,19 +52,12 @@ export default function HeaderAuth() {
       </Popover>
     );
   } else {
-    authContent = (
-      <>
-        <NavbarItem>
-          <Button onClick={() => signIn()} variant="bordered" className="text-white border-white/50 hover:border-white">
-              Sign In
-            </Button>
-        </NavbarItem>
-        <NavbarItem>
-          <Button onClick={() => signIn()} className="bg-white text-indigo-600 font-semibold">
-              Sign Up
-            </Button>
-        </NavbarItem>
-      </>
+    authContent = pathname === '/auth/signin' ? null : (
+      <NavbarItem>
+        <Button onClick={() => signIn()} className="bg-white text-indigo-600 font-semibold">
+          Sign In
+        </Button>
+      </NavbarItem>
     );
   }
 
