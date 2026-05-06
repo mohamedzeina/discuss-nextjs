@@ -4,8 +4,9 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import paths from "@/paths";
 import { requireAuth } from "@/lib/utils";
+import type { ActionResult } from "@/lib/types";
 
-export async function deleteComment(commentId: string): Promise<{ error?: string }> {
+export async function deleteComment(commentId: string): Promise<ActionResult> {
   const user = await requireAuth();
   if (!user) return { error: "You must be signed in to delete a comment." };
 

@@ -7,25 +7,18 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { requireAuth } from '@/lib/utils'
 import paths from '@/paths'
+import type { FormState } from '@/lib/types'
 
 const createPostSchema = z.object({
   title: z.string().min(3),
   content: z.string().min(10)
 });
 
-interface CreatePostFormState {
-  errors: {
-    title?: string[],
-    content?: string[],
-    _form?: string[]
-  }
-}
-
 export async function createPost(
   slug: string,
-  formState: CreatePostFormState,
+  formState: FormState,
   formData: FormData):
-  Promise<CreatePostFormState> {
+  Promise<FormState> {
 
   const result = createPostSchema.safeParse({
     title: formData.get('title'),

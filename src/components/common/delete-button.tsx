@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import type { ActionResult } from '@/lib/types';
 
 interface DeleteButtonProps {
-  action: () => Promise<{ error?: string }>;
+  action: () => Promise<ActionResult>;
   label?: string;
   confirmMessage?: string;
   onSuccess?: () => void;

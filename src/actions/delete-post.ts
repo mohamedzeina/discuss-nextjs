@@ -4,8 +4,9 @@ import { redirect } from "next/navigation";
 import { db } from "@/db";
 import paths from "@/paths";
 import { requireAuth } from "@/lib/utils";
+import type { ActionResult } from "@/lib/types";
 
-export async function deletePost(postId: string): Promise<{ error?: string }> {
+export async function deletePost(postId: string): Promise<ActionResult> {
   const user = await requireAuth();
   if (!user) return { error: "You must be signed in to delete a post." };
 

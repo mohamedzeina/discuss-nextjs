@@ -14,16 +14,10 @@ const createTopicSchema = z.object({
   description: z.string().min(10),
 });
 
-interface createTopicFormState {
-  errors: {
-    name?: string[];
-    description?: string[];
-    _form?: string[];
-  }
-}
+import type { FormState } from '@/lib/types';
 
-export async function createTopic(formState: createTopicFormState,
-  formData: FormData): Promise<createTopicFormState> {
+export async function createTopic(formState: FormState,
+  formData: FormData): Promise<FormState> {
 
 
   const result = createTopicSchema.safeParse({

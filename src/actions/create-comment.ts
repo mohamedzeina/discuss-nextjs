@@ -5,24 +5,17 @@ import { z } from "zod";
 import { requireAuth } from "@/lib/utils";
 import { db } from "@/db";
 import paths from "@/paths";
+import type { FormState } from "@/lib/types";
 
 const createCommentSchema = z.object({
   content: z.string().min(3),
 });
 
-interface CreateCommentFormState {
-  errors: {
-    content?: string[];
-    _form?: string[];
-  };
-  success?: boolean;
-}
-
 export async function createComment(
   { postId, parentId }: { postId: string; parentId?: string },
-  formState: CreateCommentFormState,
+  formState: FormState,
   formData: FormData
-): Promise<CreateCommentFormState> {
+): Promise<FormState> {
   const result = createCommentSchema.safeParse({
     content: formData.get("content"),
   });
