@@ -22,9 +22,12 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
   const { slug, postId } = params;
 
   return (
-    <div className="space-y-3">
-      <Link className="underline decoration-solid" href={paths.topicShow(slug)}>
-        {'< '}Back to {slug}
+    <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+      <Link
+        href={paths.topicShow(slug)}
+        className="inline-flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors"
+      >
+        ← Back to #{slug}
       </Link>
       <Suspense fallback={<PostShowLoading />}>
         <PostShow postId={postId} />
