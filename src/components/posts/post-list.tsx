@@ -37,7 +37,7 @@ export default async function PostList({ fetchData }: PostListProps) {
           )}
           <p className="text-xs text-gray-400">{post.user.name}</p>
           <span className="text-xs text-gray-300">·</span>
-          <p className="text-xs text-gray-400">{post._count.comments} comments</p>
+          <p className="text-xs text-gray-400">{post._count.comments} {post._count.comments === 1 ? 'comment' : 'comments'}</p>
         </div>
       </Link>
     );
