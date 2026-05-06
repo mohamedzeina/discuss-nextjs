@@ -11,6 +11,9 @@ export const { handlers: { GET, POST }, auth, signOut, signIn } = NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET
     })
   ],
+  pages: {
+    signIn: '/auth/signin',
+  },
   callbacks: {
     // Usually not needed, here we are fixing a bug with this version of nexAuth
     async session({ session, user }: any) {
