@@ -4,7 +4,7 @@ import { useState } from 'react';
 import type { ActionResult } from '@/lib/types';
 
 interface DeleteButtonProps {
-  action: () => Promise<ActionResult>;
+  action: () => Promise<ActionResult | void>;
   label?: string;
   confirmMessage?: string;
   onSuccess?: () => void;

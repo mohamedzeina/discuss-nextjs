@@ -6,7 +6,7 @@ import paths from "@/paths";
 import { requireAuth } from "@/lib/utils";
 import type { ActionResult } from "@/lib/types";
 
-export async function deletePost(postId: string): Promise<ActionResult> {
+export async function deletePost(postId: string): Promise<ActionResult | void> {
   const user = await requireAuth();
   if (!user) return { error: "You must be signed in to delete a post." };
 
