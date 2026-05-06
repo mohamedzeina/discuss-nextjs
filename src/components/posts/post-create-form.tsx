@@ -28,7 +28,7 @@ export default function PostCreateForm({ slug }: PostCreateFormProps) {
   return (
     <Popover placement="left">
       <PopoverTrigger>
-        <Button color="primary">Create a Post</Button>
+        <Button className="w-full bg-indigo-600 text-white font-semibold">Create a Post</Button>
       </PopoverTrigger>
       <PopoverContent>
         <form action={action}>
