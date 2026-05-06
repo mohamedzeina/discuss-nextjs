@@ -19,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-100 min-h-screen`}>
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Providers>
-            <Header />
+        <Providers>
+          <Header />
+          <div className="container mx-auto px-4 max-w-6xl">
             {children}
-          </Providers>
-        </div>
+          </div>
+        </Providers>
       </body>
     </html>
   );
