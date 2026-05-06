@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import SearchResults from '@/components/posts/search-results';
-import { fetchPostsbySearchTerm } from '@/db/queries/posts';
+import { fetchPostsBySearchTerm } from '@/db/queries/posts';
 
 interface SearchPageProps {
   searchParams: {
@@ -15,7 +15,7 @@ export default async function Searchpage({ searchParams }: SearchPageProps) {
     redirect('/');
   }
 
-  const posts = await fetchPostsbySearchTerm(term);
+  const posts = await fetchPostsBySearchTerm(term);
 
   return (
     <div className="p-6">
