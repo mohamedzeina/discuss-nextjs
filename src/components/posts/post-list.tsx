@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import paths from '@/paths';
 import type { PostWithData } from '@/db/queries/posts';
 
@@ -51,7 +52,7 @@ export default async function PostList({ fetchData, hideTopic, emptyMessage }: P
             <p className="text-sm text-gray-500 line-clamp-2 mb-3">{post.content}</p>
             <div className="flex items-center gap-2">
               {post.user.image && (
-                <img src={post.user.image} alt={post.user.name || ''} className="w-5 h-5 rounded-full" />
+                <Image src={post.user.image} alt={post.user.name || ''} width={20} height={20} className="rounded-full" />
               )}
               <p className="text-xs text-gray-400">{post.user.name}</p>
               <span className="text-xs text-gray-300">·</span>

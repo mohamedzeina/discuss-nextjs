@@ -2,6 +2,14 @@ import Image from 'next/image';
 import CommentCreateForm from '@/components/comments/comment-create-form';
 import { fetchCommentsByPostId } from '@/db/queries/comments';
 
+function timeAgo(date: Date): string {
+  const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
+  if (seconds < 60) return `${seconds}s ago`;
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+  return `${Math.floor(seconds / 86400)}d ago`;
+}
+
 interface CommentShowProps {
   commentId: string;
   postId: string;
@@ -42,9 +50,10 @@ export default async function CommentShow({
           </div>
         )}
         <div className="flex-1">
-          <p className="text-sm font-semibold text-gray-700 mb-1">
-            {comment.user.name}
-          </p>
+          <div className="flex items-center gap-2 mb-1">
+            <p className="text-sm font-semibold text-gray-700">{comment.user.name}</p>
+            <span className="text-xs text-gray-400" suppressHydrationWarning>{timeAgo(comment.createdAt)}</span>
+          </div>
           <p className="text-sm text-gray-700 leading-relaxed">{comment.content}</p>
           <div className="mt-2">
             <CommentCreateForm postId={comment.postId} parentId={comment.id} />

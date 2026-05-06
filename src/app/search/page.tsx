@@ -25,7 +25,7 @@ export default async function Searchpage({ searchParams }: SearchPageProps) {
           Showing results for <span className="text-indigo-600 font-medium">&ldquo;{term}&rdquo;</span>
         </p>
       </div>
-      <SearchResults posts={posts} term={term} />
+      <SearchResults posts={posts} />
     </div>
   );
 }
