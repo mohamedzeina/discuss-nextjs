@@ -36,5 +36,14 @@ export default async function PostList({ fetchData }: PostListProps) {
     );
   });
 
+  if (renderedPosts.length === 0) {
+    return (
+      <div className="text-center py-12 text-gray-400">
+        <p className="text-lg">No posts yet</p>
+        <p className="text-sm">Be the first to start a discussion</p>
+      </div>
+    );
+  }
+
   return <div className="space-y-2">{renderedPosts}</div>;
 }

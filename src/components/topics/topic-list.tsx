@@ -18,5 +18,9 @@ export default async function TopicList() {
     );
   });
 
+  if (renderedTopis.length === 0) {
+    return <p className="text-sm text-gray-400">No topics yet</p>;
+  }
+
   return <div className="flex flex-row gap-2 flex-wrap">{renderedTopis}</div>;
 }
