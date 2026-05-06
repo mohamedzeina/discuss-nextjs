@@ -1,18 +1,24 @@
 import { db } from '@/db';
 import { notFound } from 'next/navigation';
+import { auth } from '@/auth';
+import { deletePost } from '@/actions';
+import DeleteButton from '@/components/common/delete-button';
 
 interface PostShowProps {
   postId: string;
 }
 
 export default async function PostShow({ postId }: PostShowProps) {
-  const post = await db.post.findFirst({
-    where: { id: postId },
-    include: {
-      user: { select: { name: true, image: true } },
-      topic: { select: { slug: true } },
-    },
-  });
+  const [post, session] = await Promise.all([
+    db.post.findFirst({
+      where: { id: postId },
+      include: {
+        user: { select: { name: true, image: true } },
+        topic: { select: { slug: true } },
+      },
+    }),
+    auth(),
+  ]);
 
   if (!post) {
     notFound();
@@ -24,12 +30,20 @@ export default async function PostShow({ postId }: PostShowProps) {
     year: 'numeric',
   });
 
+  const isOwner = session?.user?.id === post.userId;
+
   return (
     <div className="bg-white border rounded-xl p-6 shadow-sm">
-      <div className="mb-3">
+      <div className="flex items-start justify-between mb-3">
         <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">
           #{post.topic.slug}
         </span>
+        {isOwner && (
+          <DeleteButton
+            action={deletePost.bind(null, post.id)}
+            confirmMessage="Delete this post? All comments will also be removed."
+          />
+        )}
       </div>
       <h1 className="text-2xl font-bold mb-3">{post.title}</h1>
       <div className="flex items-center gap-2 mb-5 text-sm text-gray-400">

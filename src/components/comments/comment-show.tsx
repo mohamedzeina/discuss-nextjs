@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import CommentCreateForm from '@/components/comments/comment-create-form';
+import DeleteButton from '@/components/common/delete-button';
 import { fetchCommentsByPostId } from '@/db/queries/comments';
+import { deleteComment } from '@/actions';
+import { auth } from '@/auth';
 
 function timeAgo(date: Date): string {
   const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
@@ -19,7 +22,10 @@ export default async function CommentShow({
   commentId,
   postId,
 }: CommentShowProps) {
-  const comments = await fetchCommentsByPostId(postId);
+  const [comments, session] = await Promise.all([
+    fetchCommentsByPostId(postId),
+    auth(),
+  ]);
   const comment = comments.find((c) => c.id === commentId);
 
   if (!comment) {
@@ -30,6 +36,19 @@ export default async function CommentShow({
   const renderedChildren = children.map((child) => {
     return <CommentShow key={child.id} commentId={child.id} postId={postId} />;
   });
+
+  const isOwner = session?.user?.id === comment.userId;
+
+  if (comment.deleted) {
+    return (
+      <div className="bg-white border rounded-xl p-4 shadow-sm">
+        <p className="text-sm text-gray-400 italic">[deleted]</p>
+        {renderedChildren.length > 0 && (
+          <div className="mt-4 pl-4 border-l-2 border-indigo-100 space-y-3">{renderedChildren}</div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white border rounded-xl p-4 shadow-sm">
@@ -50,9 +69,17 @@ export default async function CommentShow({
           </div>
         )}
         <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            <p className="text-sm font-semibold text-gray-700">{comment.user.name}</p>
-            <span className="text-xs text-gray-400" suppressHydrationWarning>{timeAgo(comment.createdAt)}</span>
+          <div className="flex items-center justify-between mb-1">
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-semibold text-gray-700">{comment.user.name}</p>
+              <span className="text-xs text-gray-400" suppressHydrationWarning>{timeAgo(comment.createdAt)}</span>
+            </div>
+            {isOwner && (
+              <DeleteButton
+                action={deleteComment.bind(null, comment.id)}
+                confirmMessage="Delete this comment? Replies will still be visible."
+              />
+            )}
           </div>
           <p className="text-sm text-gray-700 leading-relaxed">{comment.content}</p>
           <div className="mt-2">
