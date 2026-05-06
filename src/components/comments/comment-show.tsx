@@ -24,25 +24,36 @@ export default async function CommentShow({
   });
 
   return (
-    <div className="p-4 border mt-2 mb-1">
+    <div className="bg-white border rounded-xl p-4 shadow-sm">
       <div className="flex gap-3">
-        <Image
-          src={comment.user.image || ''}
-          alt="user image"
-          width={40}
-          height={40}
-          className="w-10 h-10 rounded-full"
-        />
-        <div className="flex-1 space-y-3">
-          <p className="text-sm font-medium text-gray-500">
+        {comment.user.image ? (
+          <Image
+            src={comment.user.image}
+            alt={comment.user.name || 'user'}
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded-full flex-shrink-0"
+          />
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+            <span className="text-xs font-semibold text-indigo-600">
+              {comment.user.name?.[0]?.toUpperCase() ?? '?'}
+            </span>
+          </div>
+        )}
+        <div className="flex-1">
+          <p className="text-sm font-semibold text-gray-700 mb-1">
             {comment.user.name}
           </p>
-          <p className="text-gray-900">{comment.content}</p>
-
-          <CommentCreateForm postId={comment.postId} parentId={comment.id} />
+          <p className="text-sm text-gray-700 leading-relaxed">{comment.content}</p>
+          <div className="mt-2">
+            <CommentCreateForm postId={comment.postId} parentId={comment.id} />
+          </div>
         </div>
       </div>
-      <div className="pl-4">{renderedChildren}</div>
+      {renderedChildren.length > 0 && (
+        <div className="mt-3 pl-11 space-y-3">{renderedChildren}</div>
+      )}
     </div>
   );
 }

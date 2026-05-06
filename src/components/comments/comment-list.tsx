@@ -20,8 +20,16 @@ export default async function CommentList({ postId }: CommentListProps) {
 
   return (
     <div className="space-y-3">
-      <h1 className="text-lg font-bold">All {comments.length} comments</h1>
-      {renderedComments}
+      <h2 className="text-base font-semibold text-gray-700">
+        {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
+      </h2>
+      {renderedComments.length === 0 ? (
+        <div className="text-center py-8 text-gray-400">
+          <p className="text-sm">No comments yet — be the first to reply!</p>
+        </div>
+      ) : (
+        renderedComments
+      )}
     </div>
   );
 }
