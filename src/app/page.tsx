@@ -26,7 +26,7 @@ export default async function Home() {
           </div>
           <PostList fetchData={fetchTopPosts} />
         </div>
-        <div className="bg-white border rounded-lg p-4 h-fit shadow-sm">
+        <div className="bg-white border rounded-lg p-4 h-fit shadow-sm sticky top-20">
           <TopicCreateForm />
           <Divider className="my-3" />
           <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Topics</h3>
