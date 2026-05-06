@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useFormState } from 'react-dom';
 import {
   Input,
   Button,
@@ -13,7 +13,7 @@ import FormButton from '../common/formButton';
 import * as actions from '@/actions';
 
 export default function TopicCreateForm() {
-  const [formState, action] = useActionState(actions.createTopic, {
+  const [formState, action] = useFormState(actions.createTopic, {
     errors: {},
   });
 

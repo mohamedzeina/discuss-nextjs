@@ -1,6 +1,7 @@
 'use client';
 
-import { useActionState, useEffect, useRef, useState } from 'react';
+import { useFormState } from 'react-dom';
+import { useEffect, useRef, useState } from 'react';
 import { Textarea, Button } from '@nextui-org/react';
 import FormButton from '@/components/common/formButton';
 import * as actions from '@/actions';
@@ -18,7 +19,7 @@ export default function CommentCreateForm({
 }: CommentCreateFormProps) {
   const [open, setOpen] = useState(startOpen);
   const ref = useRef<HTMLFormElement | null>(null);
-  const [formState, action] = useActionState(
+  const [formState, action] = useFormState(
     actions.createComment.bind(null, { postId, parentId }),
     { errors: {} }
   );

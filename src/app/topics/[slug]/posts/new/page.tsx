@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useFormState } from 'react-dom';
 import { Input, Textarea } from '@nextui-org/react';
 import FormButton from '@/components/common/formButton';
 import * as actions from '@/actions';
@@ -13,7 +13,7 @@ interface PostCreatePageProps {
 
 export default function PostCreatePage({ params }: PostCreatePageProps) {
   const { slug } = params;
-  const [formState, action] = useActionState(
+  const [formState, action] = useFormState(
     actions.createPost.bind(null, slug),
     { errors: {} }
   );
