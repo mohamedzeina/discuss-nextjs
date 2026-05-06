@@ -8,8 +8,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from '@nextui-org/react';
-import { useSession } from 'next-auth/react';
-import * as actions from '@/actions';
+import { useSession, signOut, signIn } from 'next-auth/react';
 
 export default function HeaderAuth() {
   const session = useSession();
@@ -37,11 +36,15 @@ export default function HeaderAuth() {
               <p className="text-sm font-semibold">{session.data.user.name}</p>
               <p className="text-xs text-gray-400">{session.data.user.email}</p>
             </div>
-            <form action={actions.signOut}>
-              <Button type="submit" variant="light" color="danger" className="w-full justify-start" size="sm">
-                Sign Out
-              </Button>
-            </form>
+            <Button
+              onClick={() => signOut({ callbackUrl: '/' })}
+              variant="light"
+              color="danger"
+              className="w-full justify-start"
+              size="sm"
+            >
+              Sign Out
+            </Button>
           </div>
         </PopoverContent>
       </Popover>
@@ -50,18 +53,14 @@ export default function HeaderAuth() {
     authContent = (
       <>
         <NavbarItem>
-          <form action={actions.signIn}>
-            <Button type="submit" variant="bordered" className="text-white border-white/50 hover:border-white">
+          <Button onClick={() => signIn()} variant="bordered" className="text-white border-white/50 hover:border-white">
               Sign In
             </Button>
-          </form>
         </NavbarItem>
         <NavbarItem>
-          <form action={actions.signIn}>
-            <Button type="submit" className="bg-white text-indigo-600 font-semibold">
+          <Button onClick={() => signIn()} className="bg-white text-indigo-600 font-semibold">
               Sign Up
             </Button>
-          </form>
         </NavbarItem>
       </>
     );
