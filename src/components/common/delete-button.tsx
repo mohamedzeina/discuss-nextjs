@@ -6,12 +6,14 @@ interface DeleteButtonProps {
   action: () => Promise<{ error?: string }>;
   label?: string;
   confirmMessage?: string;
+  onSuccess?: () => void;
 }
 
 export default function DeleteButton({
   action,
   label = 'Delete',
   confirmMessage = 'Are you sure?',
+  onSuccess,
 }: DeleteButtonProps) {
   const [confirming, setConfirming] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,8 +25,10 @@ export default function DeleteButton({
     if (result?.error) {
       setError(result.error);
       setConfirming(false);
+      setPending(false);
+    } else {
+      onSuccess?.();
     }
-    setPending(false);
   };
 
   if (confirming) {

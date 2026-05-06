@@ -1,95 +1,35 @@
-import Image from 'next/image';
-import CommentCreateForm from '@/components/comments/comment-create-form';
-import DeleteButton from '@/components/common/delete-button';
+import CommentCard from '@/components/comments/comment-card';
 import { fetchCommentsByPostId } from '@/db/queries/comments';
-import { deleteComment } from '@/actions';
 import { auth } from '@/auth';
-
-function timeAgo(date: Date): string {
-  const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
-  if (seconds < 60) return `${seconds}s ago`;
-  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
-  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
-  return `${Math.floor(seconds / 86400)}d ago`;
-}
 
 interface CommentShowProps {
   commentId: string;
   postId: string;
 }
 
-export default async function CommentShow({
-  commentId,
-  postId,
-}: CommentShowProps) {
+export default async function CommentShow({ commentId, postId }: CommentShowProps) {
   const [comments, session] = await Promise.all([
     fetchCommentsByPostId(postId),
     auth(),
   ]);
-  const comment = comments.find((c) => c.id === commentId);
 
-  if (!comment) {
-    return null;
-  }
+  const comment = comments.find((c) => c.id === commentId);
+  if (!comment) return null;
 
   const children = comments.filter((c) => c.parentId === commentId);
-  const renderedChildren = children.map((child) => {
-    return <CommentShow key={child.id} commentId={child.id} postId={postId} />;
-  });
-
   const isOwner = session?.user?.id === comment.userId;
 
-  if (comment.deleted) {
-    return (
-      <div className="bg-white border rounded-xl p-4 shadow-sm">
-        <p className="text-sm text-gray-400 italic">[deleted]</p>
-        {renderedChildren.length > 0 && (
-          <div className="mt-4 pl-4 border-l-2 border-indigo-100 space-y-3">{renderedChildren}</div>
-        )}
-      </div>
-    );
-  }
+  const renderedChildren = children.map((child) => (
+    <CommentShow key={child.id} commentId={child.id} postId={postId} />
+  ));
 
   return (
-    <div className="bg-white border rounded-xl p-4 shadow-sm">
-      <div className="flex gap-3">
-        {comment.user.image ? (
-          <Image
-            src={comment.user.image}
-            alt={comment.user.name || 'user'}
-            width={32}
-            height={32}
-            className="w-8 h-8 rounded-full flex-shrink-0"
-          />
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-            <span className="text-xs font-semibold text-indigo-600">
-              {comment.user.name?.[0]?.toUpperCase() ?? '?'}
-            </span>
-          </div>
-        )}
-        <div className="flex-1">
-          <div className="flex items-center justify-between mb-1">
-            <div className="flex items-center gap-2">
-              <p className="text-sm font-semibold text-gray-700">{comment.user.name}</p>
-              <span className="text-xs text-gray-400" suppressHydrationWarning>{timeAgo(comment.createdAt)}</span>
-            </div>
-            {isOwner && (
-              <DeleteButton
-                action={deleteComment.bind(null, comment.id)}
-                confirmMessage="Delete this comment? Replies will still be visible."
-              />
-            )}
-          </div>
-          <p className="text-sm text-gray-700 leading-relaxed">{comment.content}</p>
-          <div className="mt-2">
-            <CommentCreateForm postId={comment.postId} parentId={comment.id} />
-          </div>
-        </div>
-      </div>
-      {renderedChildren.length > 0 && (
-        <div className="mt-4 pl-4 border-l-2 border-indigo-100 space-y-3">{renderedChildren}</div>
-      )}
-    </div>
+    <CommentCard
+      comment={comment}
+      isOwner={isOwner}
+      hasReplies={children.length > 0}
+    >
+      {renderedChildren.length > 0 ? renderedChildren : null}
+    </CommentCard>
   );
 }
