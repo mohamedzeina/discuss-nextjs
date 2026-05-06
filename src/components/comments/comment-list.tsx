@@ -18,10 +18,12 @@ export default async function CommentList({ postId }: CommentListProps) {
     );
   });
 
+  const activeCount = comments.filter((c) => !c.deleted).length;
+
   return (
     <div className="space-y-3">
       <h2 className="text-base font-semibold text-gray-700">
-        {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
+        {activeCount} {activeCount === 1 ? 'comment' : 'comments'}
       </h2>
       {renderedComments.length === 0 ? (
         <div className="text-center py-8 text-gray-400">
