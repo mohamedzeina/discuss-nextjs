@@ -25,19 +25,16 @@ export default async function PostList({ fetchData, hideTopic, emptyMessage }: P
   return (
     <div className="space-y-2">
       {posts.map((post) => {
-        const topicSlug = post.topic.slug;
-        if (!topicSlug) throw new Error('Need a slug to link to a post');
-
         return (
           <Link
             key={post.id}
-            href={paths.postShow(topicSlug, post.id)}
+            href={paths.postShow(post.topic.slug, post.id)}
             className="block bg-white border rounded-lg p-4 hover:shadow-md hover:border-gray-300 transition-all"
           >
             {!hideTopic && (
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">
-                  {topicSlug}
+                  {post.topic.slug}
                 </span>
               </div>
             )}

@@ -4,7 +4,6 @@ import { cache } from "react";
 
 export type CommentWithAuthor = Comment & {
   user: { name: string | null, image: string | null },
-  deleted: boolean,
 }
 
 // We use request memoization by importing the cache function
