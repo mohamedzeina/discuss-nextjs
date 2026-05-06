@@ -11,9 +11,9 @@ import { Suspense } from 'react';
 
 export default function Header() {
   return (
-    <Navbar className="shadow mb-6">
+    <Navbar className="bg-indigo-600 shadow-md mb-6">
       <NavbarBrand>
-        <Link href="/" className="font-bold flex items-center gap-2">
+        <Link href="/" className="font-bold flex items-center gap-2 text-white">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
             <path d="M2 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7l-5 4V6z" />
             <path d="M8 10a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-5l-4 3v-3H10a2 2 0 0 1-2-2v-6z" opacity="0.5" />
