@@ -104,64 +104,109 @@ async function main() {
     }),
   ]);
 
-  await Promise.all([
-    db.comment.create({
-      data: {
-        content: "Totally agree — Next.js is fantastic but sometimes Astro is the right call, especially for content-heavy sites where you want minimal JS by default.",
-        userId: user.id,
-        postId: posts[0].id,
-      },
-    }),
-    db.comment.create({
-      data: {
-        content: "The App Router changed things for me. Once I got used to Server Components I stopped questioning it — it handles so much complexity for you.",
-        userId: user.id,
-        postId: posts[0].id,
-      },
-    }),
-    db.comment.create({
-      data: {
-        content: "Tailwind advocate here. The key insight is that you stop context-switching between files. Everything is colocated and that alone is worth it.",
-        userId: user.id,
-        postId: posts[1].id,
-      },
-    }),
-    db.comment.create({
-      data: {
-        content: "Vercel + Neon is my go-to as well. Neon's branching feature is underrated — great for testing schema changes without touching prod.",
-        userId: user.id,
-        postId: posts[2].id,
-      },
-    }),
-    db.comment.create({
-      data: {
-        content: "It's a browser environment thing — blocking the main thread would freeze the UI. The event loop model makes a blocking sleep fundamentally incompatible with how the runtime works.",
-        userId: user.id,
-        postId: posts[3].id,
-      },
-    }),
-    db.comment.create({
-      data: {
-        content: "Strict mode is 100% worth it. The pain is upfront, the safety is forever. I'd never start a new project without it.",
-        userId: user.id,
-        postId: posts[4].id,
-      },
-    }),
-    db.comment.create({
-      data: {
-        content: "The \"Grokking System Design\" course helped me a lot. Also practice drawing diagrams out loud — interviewers care a lot about how you communicate tradeoffs.",
-        userId: user.id,
-        postId: posts[5].id,
-      },
-    }),
-    db.comment.create({
-      data: {
-        content: "A good GitHub profile alone has gotten me recruiter attention. Projects with a live demo and a clean README make a real difference.",
-        userId: user.id,
-        postId: posts[6].id,
-      },
-    }),
-  ]);
+  const c0a = await db.comment.create({
+    data: {
+      content: "Totally agree — Next.js is fantastic but sometimes Astro is the right call, especially for content-heavy sites where you want minimal JS by default.",
+      userId: user.id,
+      postId: posts[0].id,
+    },
+  });
+  await db.comment.create({
+    data: {
+      content: "Good point on Astro. I used it for a marketing site and the zero-JS-by-default approach was a game changer for Lighthouse scores.",
+      userId: user.id,
+      postId: posts[0].id,
+      parentId: c0a.id,
+    },
+  });
+  await db.comment.create({
+    data: {
+      content: "Agreed — but once you need any interactivity on that marketing site, you end up adding islands anyway and the gap closes.",
+      userId: user.id,
+      postId: posts[0].id,
+      parentId: c0a.id,
+    },
+  });
+
+  const c0b = await db.comment.create({
+    data: {
+      content: "The App Router changed things for me. Once I got used to Server Components I stopped questioning it — it handles so much complexity for you.",
+      userId: user.id,
+      postId: posts[0].id,
+    },
+  });
+  await db.comment.create({
+    data: {
+      content: "Same. The mental model is different but once it clicks, going back to the Pages Router feels like a step backwards.",
+      userId: user.id,
+      postId: posts[0].id,
+      parentId: c0b.id,
+    },
+  });
+
+  const c1a = await db.comment.create({
+    data: {
+      content: "Tailwind advocate here. The key insight is that you stop context-switching between files. Everything is colocated and that alone is worth it.",
+      userId: user.id,
+      postId: posts[1].id,
+    },
+  });
+  await db.comment.create({
+    data: {
+      content: "Exactly. And with the VS Code extension showing you the actual CSS on hover, the readability concern basically disappears.",
+      userId: user.id,
+      postId: posts[1].id,
+      parentId: c1a.id,
+    },
+  });
+
+  await db.comment.create({
+    data: {
+      content: "Vercel + Neon is my go-to as well. Neon's branching feature is underrated — great for testing schema changes without touching prod.",
+      userId: user.id,
+      postId: posts[2].id,
+    },
+  });
+
+  const c3a = await db.comment.create({
+    data: {
+      content: "It's a browser environment thing — blocking the main thread would freeze the UI. The event loop model makes a blocking sleep fundamentally incompatible with how the runtime works.",
+      userId: user.id,
+      postId: posts[3].id,
+    },
+  });
+  await db.comment.create({
+    data: {
+      content: "Right, and Node.js inherited the same model. The Promise-based workaround is pretty clean once you get used to it: `await new Promise(r => setTimeout(r, 1000))`.",
+      userId: user.id,
+      postId: posts[3].id,
+      parentId: c3a.id,
+    },
+  });
+
+  await db.comment.create({
+    data: {
+      content: "Strict mode is 100% worth it. The pain is upfront, the safety is forever. I'd never start a new project without it.",
+      userId: user.id,
+      postId: posts[4].id,
+    },
+  });
+
+  await db.comment.create({
+    data: {
+      content: "The \"Grokking System Design\" course helped me a lot. Also practice drawing diagrams out loud — interviewers care a lot about how you communicate tradeoffs.",
+      userId: user.id,
+      postId: posts[5].id,
+    },
+  });
+
+  await db.comment.create({
+    data: {
+      content: "A good GitHub profile alone has gotten me recruiter attention. Projects with a live demo and a clean README make a real difference.",
+      userId: user.id,
+      postId: posts[6].id,
+    },
+  });
 
   console.log('Seeding complete.');
 }

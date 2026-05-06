@@ -52,7 +52,7 @@ export default async function CommentShow({
         </div>
       </div>
       {renderedChildren.length > 0 && (
-        <div className="mt-3 pl-11 space-y-3">{renderedChildren}</div>
+        <div className="mt-4 pl-4 border-l-2 border-indigo-100 space-y-3">{renderedChildren}</div>
       )}
     </div>
   );
