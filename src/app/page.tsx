@@ -11,7 +11,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold mb-4">Top Posts</h1>
         <PostList fetchData={fetchTopPosts} />
       </div>
-      <div className="bg-gray-50 border rounded-lg p-4 h-fit">
+      <div className="bg-white border rounded-lg p-4 h-fit shadow-sm">
         <TopicCreateForm />
         <Divider className="my-3" />
         <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Topics</h3>

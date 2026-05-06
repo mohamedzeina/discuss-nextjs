@@ -20,16 +20,23 @@ export default async function PostList({ fetchData }: PostListProps) {
       <Link
         key={post.id}
         href={paths.postShow(topicSlug, post.id)}
-        className="block border rounded-lg p-4 hover:shadow-md hover:border-gray-300 transition-all"
+        className="block bg-white border rounded-lg p-4 hover:shadow-md hover:border-gray-300 transition-all"
       >
-        <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-2 mb-2">
           <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">
             {topicSlug}
           </span>
         </div>
-        <h3 className="text-base font-semibold">{post.title}</h3>
-        <div className="flex gap-4 mt-1">
-          <p className="text-xs text-gray-400">By {post.user.name}</p>
+        <h3 className="text-base font-semibold mb-1">{post.title}</h3>
+        <p className="text-sm text-gray-500 line-clamp-2 mb-3">
+          {post.content}
+        </p>
+        <div className="flex items-center gap-2">
+          {post.user.image && (
+            <img src={post.user.image} alt={post.user.name || ''} className="w-5 h-5 rounded-full" />
+          )}
+          <p className="text-xs text-gray-400">{post.user.name}</p>
+          <span className="text-xs text-gray-300">·</span>
           <p className="text-xs text-gray-400">{post._count.comments} comments</p>
         </div>
       </Link>

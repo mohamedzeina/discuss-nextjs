@@ -5,7 +5,7 @@ import { db } from '@/db';
 export type PostWithData = (
   Post & {
     topic: { slug: string },
-    user: { name: string | null },
+    user: { name: string | null, image: string | null },
     _count: { comments: number }
   }
 )
@@ -36,10 +36,9 @@ export function fetchPostByTopicSlug(slug: string): Promise<PostWithData[]> {
     },
     include: {
       topic: { select: { slug: true } },
-      user: { select: { name: true } },
+      user: { select: { name: true, image: true } },
       _count: { select: { comments: true } },
     }
-
   })
 }
 
