@@ -16,8 +16,17 @@ export default async function Searchpage({ searchParams }: SearchPageProps) {
   }
 
   return (
-    <div>
-      <PostList fetchData={() => fetchPostsbySearchTerm(term)} />
+    <div className="p-6">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold">Search Results</h1>
+        <p className="text-sm text-gray-500">
+          Showing results for <span className="text-indigo-600 font-medium">"{term}"</span>
+        </p>
+      </div>
+      <PostList
+        fetchData={() => fetchPostsbySearchTerm(term)}
+        emptyMessage={`No posts found for "${term}"`}
+      />
     </div>
   );
 }
