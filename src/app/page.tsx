@@ -8,7 +8,10 @@ export default function Home() {
   return (
     <div className="grid grid-cols-4 gap-6 p-6">
       <div className="col-span-3">
-        <h1 className="text-2xl font-bold mb-4">Top Posts</h1>
+        <div className="mb-4">
+          <h1 className="text-2xl font-bold">Top Posts</h1>
+          <p className="text-sm text-gray-500">Most active discussions</p>
+        </div>
         <PostList fetchData={fetchTopPosts} />
       </div>
       <div className="bg-white border rounded-lg p-4 h-fit shadow-sm">
