@@ -1,10 +1,3 @@
-import { auth } from '@/auth';
-
-export async function requireAuth() {
-  const session = await auth();
-  return session?.user ?? null;
-}
-
 export function timeAgo(date: Date): string {
   const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
   if (seconds < 60) return `${seconds}s ago`;

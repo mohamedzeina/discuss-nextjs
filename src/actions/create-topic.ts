@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { requireAuth } from '@/lib/utils';
+import { requireAuth } from '@/lib/server-utils';
 import type { Topic } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { db } from '@/db';

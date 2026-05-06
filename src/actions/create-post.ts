@@ -5,7 +5,7 @@ import type { Post } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
-import { requireAuth } from '@/lib/utils'
+import { requireAuth } from '@/lib/server-utils'
 import paths from '@/paths'
 import type { FormState } from '@/lib/types'
 

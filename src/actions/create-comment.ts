@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { requireAuth } from "@/lib/utils";
+import { requireAuth } from "@/lib/server-utils";
 import { db } from "@/db";
 import paths from "@/paths";
 import type { FormState } from "@/lib/types";

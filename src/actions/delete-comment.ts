@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import paths from "@/paths";
-import { requireAuth } from "@/lib/utils";
+import { requireAuth } from "@/lib/server-utils";
 import type { ActionResult } from "@/lib/types";
 
 export async function deleteComment(commentId: string): Promise<ActionResult> {
