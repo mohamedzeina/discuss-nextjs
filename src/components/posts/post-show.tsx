@@ -6,11 +6,6 @@ interface PostShowProps {
 }
 
 export default async function PostShow({ postId }: PostShowProps) {
-  // Adding some arbitrary loading because we will use suspense(content streaming) to render the initial page
-  // Other page components will be shown after data is fetched
-  // So we will add a loading skeleton to show when the data is being fetched
-  await new Promise((resolve) => setTimeout(resolve, 2500));
-
   const post = await db.post.findFirst({
     where: { id: postId },
   });
