@@ -36,11 +36,11 @@ export default function CommentCreateForm({
 
   const form = (
     <form action={action} ref={ref}>
-      <div className="space-y-2 px-1">
+      <div className="space-y-3">
         <Textarea
           name="content"
-          label="Reply"
-          placeholder="Enter your comment"
+          placeholder={startOpen ? 'Share your thoughts...' : 'Write a reply...'}
+          minRows={startOpen ? 3 : 2}
           isInvalid={!!formState.errors.content}
           errorMessage={formState.errors.content?.join(', ')}
         />
@@ -51,17 +51,31 @@ export default function CommentCreateForm({
           </div>
         ) : null}
 
-        <FormButton>Create Comment</FormButton>
+        <FormButton>{startOpen ? 'Post Comment' : 'Post Reply'}</FormButton>
       </div>
     </form>
   );
 
+  if (startOpen) {
+    return (
+      <div className="bg-white border rounded-xl p-4 shadow-sm">
+        <h2 className="text-sm font-semibold text-gray-700 mb-3">Leave a comment</h2>
+        {form}
+      </div>
+    );
+  }
+
   return (
     <div>
-      <Button size="sm" variant="light" onClick={() => setOpen(!open)}>
-        Reply
+      <Button
+        size="sm"
+        variant="light"
+        className="text-indigo-600 hover:text-indigo-800 font-medium px-0"
+        onClick={() => setOpen(!open)}
+      >
+        {open ? 'Cancel' : 'Reply'}
       </Button>
-      {open && form}
+      {open && <div className="mt-2">{form}</div>}
     </div>
   );
 }
