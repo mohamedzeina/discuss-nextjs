@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { auth } from '@/auth';
+import { requireAuth } from '@/lib/utils';
 import type { Topic } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { db } from '@/db';
@@ -37,13 +37,9 @@ export async function createTopic(formState: createTopicFormState,
     }
   }
 
-  const session = await auth();
-  if (!session || !session.user) {
-    return {
-      errors: {
-        _form: ['You must be signed in to create a topic']
-      }
-    }
+  const user = await requireAuth();
+  if (!user) {
+    return { errors: { _form: ['You must be signed in to create a topic'] } };
   }
 
   let topic: Topic;

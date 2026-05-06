@@ -1,15 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { auth } from "@/auth";
 import { db } from "@/db";
 import paths from "@/paths";
+import { requireAuth } from "@/lib/utils";
 
 export async function deleteComment(commentId: string): Promise<{ error?: string }> {
-  const session = await auth();
-  if (!session?.user) {
-    return { error: "You must be signed in to delete a comment." };
-  }
+  const user = await requireAuth();
+  if (!user) return { error: "You must be signed in to delete a comment." };
 
   const comment = await db.comment.findFirst({
     where: { id: commentId },
@@ -20,7 +18,7 @@ export async function deleteComment(commentId: string): Promise<{ error?: string
     return { error: "Comment not found." };
   }
 
-  if (comment.userId !== session.user.id) {
+  if (comment.userId !== user.id) {
     return { error: "You can only delete your own comments." };
   }
 

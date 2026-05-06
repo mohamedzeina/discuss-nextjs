@@ -5,7 +5,7 @@ import type { Post } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
-import { auth } from '@/auth'
+import { requireAuth } from '@/lib/utils'
 import paths from '@/paths'
 
 const createPostSchema = z.object({
@@ -38,13 +38,9 @@ export async function createPost(
     }
   }
 
-  const session = await auth();
-  if (!session || !session.user) {
-    return {
-      errors: {
-        _form: ['You must be signed in to create a post']
-      }
-    }
+  const user = await requireAuth();
+  if (!user) {
+    return { errors: { _form: ['You must be signed in to create a post'] } };
   }
 
   const topic = await db.topic.findFirst({
@@ -66,7 +62,7 @@ export async function createPost(
       data: {
         title: result.data.title,
         content: result.data.content,
-        userId: session.user.id,
+        userId: user.id,
         topicId: topic.id
       }
     })

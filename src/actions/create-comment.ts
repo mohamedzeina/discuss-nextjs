@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { auth } from "@/auth";
+import { requireAuth } from "@/lib/utils";
 import { db } from "@/db";
 import paths from "@/paths";
 
@@ -33,13 +33,9 @@ export async function createComment(
     };
   }
 
-  const session = await auth();
-  if (!session || !session.user) {
-    return {
-      errors: {
-        _form: ["You must sign in to do this."],
-      },
-    };
+  const user = await requireAuth();
+  if (!user) {
+    return { errors: { _form: ["You must sign in to do this."] } };
   }
 
   try {
@@ -48,7 +44,7 @@ export async function createComment(
         content: result.data.content,
         postId: postId,
         parentId: parentId,
-        userId: session.user.id,
+        userId: user.id,
       },
     });
   } catch (err) {
