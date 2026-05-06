@@ -1,24 +1,16 @@
 import TopicCreateForm from '@/components/topics/topic-create-form';
 import TopicList from '@/components/topics/topic-list';
 import { Divider } from '@nextui-org/react';
-import { fetchTopPosts, fetchRecentPosts } from '@/db/queries/posts';
-import PostList from '@/components/posts/post-list';
-import PostListSkeleton from '@/components/posts/post-list-skeleton';
+import { fetchRecentPosts } from '@/db/queries/posts';
+import PostFeed from '@/components/posts/post-feed';
 import { auth } from '@/auth';
 import { db } from '@/db';
-import SortToggle from '@/components/posts/sort-toggle';
-import { Suspense } from 'react';
 
-interface HomeProps {
-  searchParams: { sort?: string };
-}
-
-export default async function Home({ searchParams }: HomeProps) {
+export default async function Home() {
   const session = await auth();
-  const sort = searchParams.sort === 'new' ? 'new' : 'top';
-  const fetchData = sort === 'new' ? fetchRecentPosts : fetchTopPosts;
 
-  const [postCount, topicCount] = await Promise.all([
+  const [posts, postCount, topicCount] = await Promise.all([
+    fetchRecentPosts(),
     db.post.count(),
     db.topic.count(),
   ]);
@@ -39,16 +31,7 @@ export default async function Home({ searchParams }: HomeProps) {
       </div>
       <div className="grid grid-cols-4 gap-6">
         <div className="col-span-3">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-2xl font-bold">{sort === 'new' ? 'Recent Posts' : 'Top Posts'}</h1>
-              <p className="text-sm text-gray-500">{sort === 'new' ? 'Latest discussions' : 'Most active discussions'}</p>
-            </div>
-            <SortToggle current={sort} />
-          </div>
-          <Suspense key={sort} fallback={<PostListSkeleton />}>
-            <PostList fetchData={fetchData} />
-          </Suspense>
+          <PostFeed posts={posts} />
         </div>
         <div className="bg-white border rounded-lg p-4 h-fit shadow-sm sticky top-20">
           <TopicCreateForm />
