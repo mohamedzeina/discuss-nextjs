@@ -1,12 +1,27 @@
 import TopicCreateForm from '@/components/topics/topic-create-form';
 import TopicList from '@/components/topics/topic-list';
 import { Divider } from '@nextui-org/react';
-import { fetchTopPosts } from '@/db/queries/posts';
+import { fetchTopPosts, fetchRecentPosts } from '@/db/queries/posts';
 import PostList from '@/components/posts/post-list';
+import PostListSkeleton from '@/components/posts/post-list-skeleton';
 import { auth } from '@/auth';
+import { db } from '@/db';
+import SortToggle from '@/components/posts/sort-toggle';
+import { Suspense } from 'react';
 
-export default async function Home() {
+interface HomeProps {
+  searchParams: { sort?: string };
+}
+
+export default async function Home({ searchParams }: HomeProps) {
   const session = await auth();
+  const sort = searchParams.sort === 'new' ? 'new' : 'top';
+  const fetchData = sort === 'new' ? fetchRecentPosts : fetchTopPosts;
+
+  const [postCount, topicCount] = await Promise.all([
+    db.post.count(),
+    db.topic.count(),
+  ]);
 
   return (
     <div className="p-6">
@@ -18,13 +33,22 @@ export default async function Home() {
           </p>
         </div>
       )}
+      <div className="flex items-center gap-6 mb-6 text-sm text-gray-500">
+        <span><span className="font-semibold text-gray-800">{postCount}</span> posts</span>
+        <span><span className="font-semibold text-gray-800">{topicCount}</span> topics</span>
+      </div>
       <div className="grid grid-cols-4 gap-6">
         <div className="col-span-3">
-          <div className="mb-4">
-            <h1 className="text-2xl font-bold">Top Posts</h1>
-            <p className="text-sm text-gray-500">Most active discussions</p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-2xl font-bold">{sort === 'new' ? 'Recent Posts' : 'Top Posts'}</h1>
+              <p className="text-sm text-gray-500">{sort === 'new' ? 'Latest discussions' : 'Most active discussions'}</p>
+            </div>
+            <SortToggle current={sort} />
           </div>
-          <PostList fetchData={fetchTopPosts} />
+          <Suspense key={sort} fallback={<PostListSkeleton />}>
+            <PostList fetchData={fetchData} />
+          </Suspense>
         </div>
         <div className="bg-white border rounded-lg p-4 h-fit shadow-sm sticky top-20">
           <TopicCreateForm />
