@@ -21,8 +21,8 @@ export function fetchPostsbySearchTerm(term: string): Promise<PostWithData[]> {
     },
     where: {
       OR: [
-        { title: { contains: term } },
-        { content: { contains: term } }
+        { title: { contains: term, mode: 'insensitive' } },
+        { content: { contains: term, mode: 'insensitive' } }
       ]
     }
   })
