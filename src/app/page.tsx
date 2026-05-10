@@ -16,9 +16,9 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="p-6">
+    <div className="px-4 py-6 sm:px-6">
       {!session?.user ? (
-        <div className="bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 text-white rounded-2xl p-8 mb-6">
+        <div className="bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 text-white rounded-2xl p-6 sm:p-8 mb-6">
           <h2 className="text-3xl font-bold mb-2">Welcome to Discuss</h2>
           <p className="text-indigo-100 text-sm max-w-lg mb-6">
             A community platform to ask questions, share ideas, and connect with developers. Sign in with GitHub to join the conversation.
@@ -46,11 +46,11 @@ export default async function Home() {
           </div>
         </div>
       )}
-      <div className="grid grid-cols-4 gap-6">
-        <div className="col-span-3">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="lg:col-span-3">
           <PostFeed posts={posts} />
         </div>
-        <div className="bg-white border border-gray-200 rounded-xl h-fit shadow-sm sticky top-20 overflow-hidden">
+        <div className="hidden lg:block bg-white border border-gray-200 rounded-xl h-fit shadow-sm sticky top-20 overflow-hidden">
           <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
           <div className="p-4">
             <TopicCreateForm />
