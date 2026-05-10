@@ -1,13 +1,22 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
-import { useSearchParams } from 'next/navigation';
-import * as actions from '@/actions';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function SearchInput() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const term = new FormData(e.currentTarget).get('term');
+    if (typeof term === 'string' && term.trim()) {
+      router.push(`/search?term=${encodeURIComponent(term.trim())}`);
+    }
+  };
+
   return (
-    <form action={actions.search}>
+    <form onSubmit={handleSubmit}>
       <Input
         name="term"
         size="sm"
