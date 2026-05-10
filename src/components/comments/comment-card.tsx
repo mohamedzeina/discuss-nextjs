@@ -69,7 +69,7 @@ export default function CommentCard({ comment, isOwner, hasReplies, children }: 
           <div className="flex items-center justify-between mb-1">
             <div className="flex items-center gap-2">
               <p className="text-sm font-semibold text-gray-700">{comment.user.name}</p>
-              <span className="text-xs text-gray-400" suppressHydrationWarning>
+              <span className="text-xs text-gray-500" suppressHydrationWarning>
                 {timeAgo(comment.createdAt)}
               </span>
             </div>

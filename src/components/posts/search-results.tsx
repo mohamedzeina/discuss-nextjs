@@ -34,7 +34,7 @@ export default function SearchResults({ posts }: SearchResultsProps) {
           <Link
             key={post.id}
             href={paths.postShow(post.topic.slug, post.id)}
-            className="block bg-white border rounded-lg p-4 hover:shadow-md hover:border-gray-300 transition-all"
+            className="block bg-white border-l-4 border-l-transparent border border-gray-200 rounded-lg p-4 hover:border-l-indigo-500 hover:shadow-md hover:border-gray-200 transition-all duration-200 cursor-pointer"
           >
             <div className="flex items-center gap-2 mb-2">
               <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">
@@ -47,11 +47,11 @@ export default function SearchResults({ posts }: SearchResultsProps) {
               {post.user.image && (
                 <Image src={post.user.image} alt={post.user.name || ''} width={20} height={20} className="rounded-full" />
               )}
-              <p className="text-xs text-gray-400">{post.user.name}</p>
-              <span className="text-xs text-gray-300">·</span>
-              <p className="text-xs text-gray-400">{post._count.comments} {post._count.comments === 1 ? 'comment' : 'comments'}</p>
-              <span className="text-xs text-gray-300">·</span>
-              <p className="text-xs text-gray-400" suppressHydrationWarning>{timeAgo(post.createdAt)}</p>
+              <p className="text-xs text-gray-500">{post.user.name}</p>
+              <span className="text-xs text-gray-400">·</span>
+              <p className="text-xs text-gray-500">{post._count.comments} {post._count.comments === 1 ? 'comment' : 'comments'}</p>
+              <span className="text-xs text-gray-400">·</span>
+              <p className="text-xs text-gray-500" suppressHydrationWarning>{timeAgo(post.createdAt)}</p>
             </div>
           </Link>
         ))}
@@ -61,7 +61,7 @@ export default function SearchResults({ posts }: SearchResultsProps) {
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all duration-200"
           >
             ← Previous
           </button>
@@ -69,7 +69,7 @@ export default function SearchResults({ posts }: SearchResultsProps) {
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all duration-200"
           >
             Next →
           </button>

@@ -18,7 +18,7 @@ export default async function Searchpage({ searchParams }: SearchPageProps) {
   const posts = await fetchPostsBySearchTerm(term);
 
   return (
-    <div className="p-6">
+    <div className="px-4 py-6 sm:px-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Search Results</h1>
         <p className="text-sm text-gray-500">
