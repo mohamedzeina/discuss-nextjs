@@ -20,9 +20,12 @@ export default function SearchResults({ posts }: SearchResultsProps) {
 
   if (posts.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-400">
-        <p className="text-lg">No posts found</p>
-        <p className="text-sm">Try a different search term</p>
+      <div className="text-center py-16 bg-white rounded-xl border border-gray-200">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 text-gray-300 mx-auto mb-4">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+        <p className="text-base font-semibold text-gray-700">No results found</p>
+        <p className="text-sm text-gray-500 mt-1">Try a different search term</p>
       </div>
     );
   }
@@ -42,16 +45,16 @@ export default function SearchResults({ posts }: SearchResultsProps) {
               </span>
             </div>
             <h3 className="text-base font-semibold mb-1">{post.title}</h3>
-            <p className="text-sm text-gray-500 line-clamp-2 mb-3">{post.content}</p>
+            <p className="text-sm text-gray-600 line-clamp-2 mb-3">{post.content}</p>
             <div className="flex items-center gap-2">
               {post.user.image && (
                 <Image src={post.user.image} alt={post.user.name || ''} width={20} height={20} className="rounded-full" />
               )}
-              <p className="text-xs text-gray-500">{post.user.name}</p>
+              <p className="text-xs text-gray-600">{post.user.name}</p>
               <span className="text-xs text-gray-400">·</span>
-              <p className="text-xs text-gray-500">{post._count.comments} {post._count.comments === 1 ? 'comment' : 'comments'}</p>
+              <p className="text-xs text-gray-600">{post._count.comments} {post._count.comments === 1 ? 'comment' : 'comments'}</p>
               <span className="text-xs text-gray-400">·</span>
-              <p className="text-xs text-gray-500" suppressHydrationWarning>{timeAgo(post.createdAt)}</p>
+              <p className="text-xs text-gray-600" suppressHydrationWarning>{timeAgo(post.createdAt)}</p>
             </div>
           </Link>
         ))}

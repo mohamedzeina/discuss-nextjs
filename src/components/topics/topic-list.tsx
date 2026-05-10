@@ -6,7 +6,7 @@ export default async function TopicList() {
   const topics = await db.topic.findMany();
 
   if (topics.length === 0) {
-    return <p className="text-sm text-gray-400">No topics yet</p>;
+    return <p className="text-sm text-gray-500">No topics yet</p>;
   }
 
   return (
