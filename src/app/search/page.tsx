@@ -21,8 +21,8 @@ export default async function Searchpage({ searchParams }: SearchPageProps) {
     <div className="px-4 py-6 sm:px-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Search Results</h1>
-        <p className="text-sm text-gray-500">
-          Showing results for <span className="text-indigo-600 font-medium">&ldquo;{term}&rdquo;</span>
+        <p className="text-sm text-gray-600">
+          {posts.length} {posts.length === 1 ? 'result' : 'results'} for <span className="text-indigo-600 font-medium">&ldquo;{term}&rdquo;</span>
         </p>
       </div>
       <SearchResults posts={posts} />

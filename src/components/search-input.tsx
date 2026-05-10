@@ -10,6 +10,7 @@ export default function SearchInput() {
     <form action={actions.search}>
       <Input
         name="term"
+        size="sm"
         defaultValue={searchParams.get('term') || ''}
         placeholder="Search discussions..."
         classNames={{
