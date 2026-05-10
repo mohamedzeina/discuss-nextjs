@@ -1,8 +1,7 @@
-import Link from 'next/link';
 import PostShow from '@/components/posts/post-show';
+import PostBreadcrumb from '@/components/posts/post-breadcrumb';
 import CommentList from '@/components/comments/comment-list';
 import CommentCreateForm from '@/components/comments/comment-create-form';
-import paths from '@/paths';
 import { Suspense } from 'react';
 import PostShowLoading from '@/components/posts/post-show-loading';
 import CommentListLoading from '@/components/comments/comment-list-loading';
@@ -24,12 +23,9 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
-      <Link
-        href={paths.topicShow(slug)}
-        className="inline-flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors"
-      >
-        ← Back to #{slug}
-      </Link>
+      <Suspense fallback={<div className="h-4 w-48 bg-gray-100 rounded animate-pulse" />}>
+        <PostBreadcrumb postId={postId} slug={slug} />
+      </Suspense>
       <Suspense fallback={<PostShowLoading />}>
         <PostShow postId={postId} />
       </Suspense>

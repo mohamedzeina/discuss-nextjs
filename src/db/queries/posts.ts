@@ -1,5 +1,6 @@
 import type { Post } from '@prisma/client';
 import { db } from '@/db';
+import { cache } from 'react';
 
 export type PostWithData = Post & {
 	topic: { slug: string };
@@ -12,6 +13,16 @@ const postInclude = {
 	user: { select: { name: true, image: true } },
 	_count: { select: { comments: { where: { deleted: false } } } },
 } as const;
+
+export const fetchPostById = cache((postId: string) =>
+  db.post.findFirst({
+    where: { id: postId },
+    include: {
+      user: { select: { name: true, image: true } },
+      topic: { select: { slug: true } },
+    },
+  })
+);
 
 export function fetchPostsBySearchTerm(term: string): Promise<PostWithData[]> {
 	return db.post.findMany({

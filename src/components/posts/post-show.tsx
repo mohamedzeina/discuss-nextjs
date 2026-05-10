@@ -1,8 +1,8 @@
-import { db } from '@/db';
 import { notFound } from 'next/navigation';
 import { auth } from '@/auth';
 import { deletePost } from '@/actions';
 import DeleteButton from '@/components/common/delete-button';
+import { fetchPostById } from '@/db/queries/posts';
 
 interface PostShowProps {
   postId: string;
@@ -10,13 +10,7 @@ interface PostShowProps {
 
 export default async function PostShow({ postId }: PostShowProps) {
   const [post, session] = await Promise.all([
-    db.post.findFirst({
-      where: { id: postId },
-      include: {
-        user: { select: { name: true, image: true } },
-        topic: { select: { slug: true } },
-      },
-    }),
+    fetchPostById(postId),
     auth(),
   ]);
 

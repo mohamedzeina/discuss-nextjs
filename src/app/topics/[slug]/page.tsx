@@ -3,7 +3,7 @@ import PostList from '@/components/posts/post-list';
 import { fetchPostByTopicSlug } from '@/db/queries/posts';
 import { db } from '@/db';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import Breadcrumb from '@/components/common/breadcrumb';
 
 interface TopicShowPageProps {
   params: {
@@ -23,12 +23,7 @@ export default async function TopicShowPage({ params }: TopicShowPageProps) {
 
   return (
     <div className="px-4 py-6 sm:px-6">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors mb-4"
-      >
-        ← Back to home
-      </Link>
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: `#${slug}` }]} />
       <div className="bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 text-white rounded-2xl p-6 sm:p-8 mb-6">
         <h1 className="text-3xl font-bold capitalize mb-1">{slug}</h1>
         <p className="text-indigo-100 text-sm max-w-lg mb-4">{topic.description}</p>
