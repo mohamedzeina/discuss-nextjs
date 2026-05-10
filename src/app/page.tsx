@@ -44,11 +44,19 @@ export default async function Home() {
         <div className="col-span-3">
           <PostFeed posts={posts} />
         </div>
-        <div className="bg-white border rounded-lg p-4 h-fit shadow-sm sticky top-20">
-          <TopicCreateForm />
-          <Divider className="my-3" />
-          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Topics</h3>
-          <TopicList />
+        <div className="bg-white border border-gray-200 rounded-xl h-fit shadow-sm sticky top-20 overflow-hidden">
+          <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
+          <div className="p-4">
+            <TopicCreateForm />
+            <Divider className="my-4" />
+            <div className="flex items-center gap-1.5 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-indigo-500">
+                <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5v11.75A2.75 2.75 0 0 0 16.75 18h-12A2.75 2.75 0 0 1 2 15.25V3.5zM6 7a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2H6zm0 3a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2H6z" />
+              </svg>
+              <h3 className="text-sm font-semibold text-gray-700">Topics</h3>
+            </div>
+            <TopicList />
+          </div>
         </div>
       </div>
     </div>
