@@ -22,7 +22,7 @@ export default async function TopicShowPage({ params }: TopicShowPageProps) {
   if (!topic) notFound();
 
   return (
-    <div className="p-6">
+    <div className="px-4 py-6 sm:px-6">
       <Link
         href="/"
         className="inline-flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors mb-4"
@@ -36,6 +36,9 @@ export default async function TopicShowPage({ params }: TopicShowPageProps) {
           <p className="text-2xl font-bold">{topic._count.posts}</p>
           <p className="text-indigo-200 text-xs">{topic._count.posts === 1 ? 'post' : 'posts'}</p>
         </div>
+      </div>
+      <div className="lg:hidden mb-4">
+        <PostCreateForm slug={slug} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">
