@@ -60,7 +60,7 @@ export default function PostFeed({ posts }: { posts: PostWithData[] }) {
             <button
               key={s}
               onClick={() => handleSort(s)}
-              className={`px-3 py-1 rounded-md text-sm font-medium transition-all duration-200 capitalize cursor-pointer ${
+              className={`px-3 py-1 rounded-md text-sm font-medium transition-all duration-200 motion-reduce:transition-none capitalize cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 sort === s ? 'bg-white shadow text-gray-800' : 'text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -74,7 +74,7 @@ export default function PostFeed({ posts }: { posts: PostWithData[] }) {
           <Link
             key={post.id}
             href={paths.postShow(post.topic.slug, post.id)}
-            className="block bg-white border-l-4 border-l-transparent border border-gray-200 rounded-lg p-4 hover:border-l-indigo-500 hover:shadow-md hover:border-gray-200 transition-all duration-200 cursor-pointer"
+            className="block bg-white border-l-4 border-l-transparent border border-gray-200 rounded-lg p-4 hover:border-l-indigo-500 hover:shadow-md hover:border-gray-200 transition-all duration-200 motion-reduce:transition-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <div className="flex items-center gap-2 mb-2">
               <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">
@@ -101,7 +101,7 @@ export default function PostFeed({ posts }: { posts: PostWithData[] }) {
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all duration-200"
+            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             ← Previous
           </button>
@@ -109,7 +109,7 @@ export default function PostFeed({ posts }: { posts: PostWithData[] }) {
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all duration-200"
+            className="px-4 py-2 text-sm font-medium rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             Next →
           </button>

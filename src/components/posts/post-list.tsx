@@ -29,7 +29,7 @@ export default async function PostList({ fetchData, hideTopic, emptyMessage }: P
           <Link
             key={post.id}
             href={paths.postShow(post.topic.slug, post.id)}
-            className="block bg-white border-l-4 border-l-transparent border border-gray-200 rounded-lg p-4 hover:border-l-indigo-500 hover:shadow-md hover:border-gray-200 transition-all duration-200 cursor-pointer"
+            className="block bg-white border-l-4 border-l-transparent border border-gray-200 rounded-lg p-4 hover:border-l-indigo-500 hover:shadow-md hover:border-gray-200 transition-all duration-200 motion-reduce:transition-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             {!hideTopic && (
               <div className="flex items-center gap-2 mb-2">

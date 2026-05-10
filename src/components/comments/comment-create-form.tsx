@@ -76,7 +76,7 @@ export default function CommentCreateForm({
       <Button
         size="sm"
         variant="light"
-        className="text-indigo-600 hover:text-indigo-800 font-medium px-0 cursor-pointer"
+        className="text-indigo-600 hover:text-indigo-800 font-medium px-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
         onClick={() => setOpen(!open)}
       >
         {open ? 'Cancel' : 'Reply'}

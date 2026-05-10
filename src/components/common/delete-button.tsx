@@ -39,14 +39,14 @@ export default function DeleteButton({
         <button
           onClick={handleConfirm}
           disabled={pending}
-          className="text-xs text-red-500 hover:text-red-700 font-medium disabled:opacity-40 transition-colors"
+          className="text-xs text-red-500 hover:text-red-700 font-medium disabled:opacity-40 transition-colors motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-red-400 rounded"
         >
           {pending ? 'Deleting...' : 'Yes'}
         </button>
         <button
           onClick={() => setConfirming(false)}
           disabled={pending}
-          className="text-xs text-gray-400 hover:text-gray-600 font-medium disabled:opacity-40 transition-colors"
+          className="text-xs text-gray-400 hover:text-gray-600 font-medium disabled:opacity-40 transition-colors motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
         >
           Cancel
         </button>
@@ -58,7 +58,7 @@ export default function DeleteButton({
   return (
     <button
       onClick={() => setConfirming(true)}
-      className="text-xs text-red-500 hover:text-red-700 font-medium transition-colors"
+      className="text-xs text-red-500 hover:text-red-700 font-medium transition-colors motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-red-400 rounded"
     >
       {label}
     </button>

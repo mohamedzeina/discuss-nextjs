@@ -15,7 +15,7 @@ export default async function TopicList() {
         <Link
           key={topic.id}
           href={paths.topicShow(topic.slug)}
-          className="text-xs font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 hover:text-purple-900 px-2.5 py-1 rounded-full transition-colors duration-200 cursor-pointer"
+          className="text-xs font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 hover:text-purple-900 px-2.5 py-1 rounded-full transition-colors duration-200 motion-reduce:transition-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
         >
           {topic.slug}
         </Link>
