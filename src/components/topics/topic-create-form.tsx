@@ -22,15 +22,19 @@ export default function TopicCreateForm() {
       <PopoverTrigger>
         <Button className="w-full bg-indigo-600 text-white font-semibold">Create a Topic</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="p-0 overflow-hidden w-80">
+        <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
         <form action={action}>
-          <div className="flex flex-col gap-4 p-4 w-80">
-            <h3 className="text-lg">Create a Topic</h3>
+          <div className="flex flex-col gap-4 p-5">
+            <div>
+              <h3 className="text-base font-semibold text-gray-800">Create a Topic</h3>
+              <p className="text-xs text-gray-500 mt-0.5">Lowercase letters and dashes only</p>
+            </div>
             <Input
               name="name"
               label="Name"
               labelPlacement="outside"
-              placeholder="Name"
+              placeholder="e.g. react-tips"
               isInvalid={!!formState.errors.name}
               errorMessage={formState.errors.name?.join(', ')}
             />
@@ -38,7 +42,7 @@ export default function TopicCreateForm() {
               name="description"
               label="Description"
               labelPlacement="outside"
-              placeholder="Describe your topic"
+              placeholder="What is this topic about?"
               isInvalid={!!formState.errors.description}
               errorMessage={formState.errors.description?.join(', ')}
             />
@@ -52,7 +56,7 @@ export default function TopicCreateForm() {
               </div>
             )}
 
-            <FormButton>Save</FormButton>
+            <FormButton>Create Topic</FormButton>
           </div>
         </form>
       </PopoverContent>
