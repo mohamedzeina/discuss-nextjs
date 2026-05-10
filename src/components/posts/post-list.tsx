@@ -29,7 +29,7 @@ export default async function PostList({ fetchData, hideTopic, emptyMessage }: P
           <Link
             key={post.id}
             href={paths.postShow(post.topic.slug, post.id)}
-            className="block bg-white border rounded-lg p-4 hover:shadow-md hover:border-gray-300 transition-all"
+            className="block bg-white border-l-4 border-l-transparent border border-gray-200 rounded-lg p-4 hover:border-l-indigo-500 hover:shadow-md hover:border-gray-200 transition-all duration-200 cursor-pointer"
           >
             {!hideTopic && (
               <div className="flex items-center gap-2 mb-2">
@@ -44,11 +44,11 @@ export default async function PostList({ fetchData, hideTopic, emptyMessage }: P
               {post.user.image && (
                 <Image src={post.user.image} alt={post.user.name || ''} width={20} height={20} className="rounded-full" />
               )}
-              <p className="text-xs text-gray-400">{post.user.name}</p>
-              <span className="text-xs text-gray-300">·</span>
-              <p className="text-xs text-gray-400">{post._count.comments} {post._count.comments === 1 ? 'comment' : 'comments'}</p>
-              <span className="text-xs text-gray-300">·</span>
-              <p className="text-xs text-gray-400">{timeAgo(post.createdAt)}</p>
+              <p className="text-xs text-gray-500">{post.user.name}</p>
+              <span className="text-xs text-gray-400">·</span>
+              <p className="text-xs text-gray-500">{post._count.comments} {post._count.comments === 1 ? 'comment' : 'comments'}</p>
+              <span className="text-xs text-gray-400">·</span>
+              <p className="text-xs text-gray-500">{timeAgo(post.createdAt)}</p>
             </div>
           </Link>
         );
