@@ -35,9 +35,15 @@ export default async function Home() {
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-6 mb-6 text-sm text-gray-500">
-          <span><span className="font-semibold text-gray-800">{postCount}</span> posts</span>
-          <span><span className="font-semibold text-gray-800">{topicCount}</span> topics</span>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm">
+            <span className="text-xl font-bold text-indigo-600">{postCount}</span>
+            <span className="text-sm text-gray-500">posts</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm">
+            <span className="text-xl font-bold text-indigo-600">{topicCount}</span>
+            <span className="text-sm text-gray-500">topics</span>
+          </div>
         </div>
       )}
       <div className="grid grid-cols-4 gap-6">
