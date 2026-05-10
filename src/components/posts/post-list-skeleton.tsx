@@ -4,7 +4,7 @@ export default function PostListSkeleton() {
   return (
     <div className="space-y-3">
       {[...Array(5)].map((_, i) => (
-        <div key={i} className="bg-white border rounded-lg p-4 space-y-2">
+        <div key={i} className="bg-white border-l-4 border-l-gray-200 border border-gray-200 rounded-lg p-4 space-y-2">
           <Skeleton className="h-3 w-16 rounded-full" />
           <Skeleton className="h-5 w-3/4 rounded" />
           <Skeleton className="h-4 w-full rounded" />
