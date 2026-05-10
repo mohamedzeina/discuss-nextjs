@@ -3,6 +3,7 @@ import { auth } from '@/auth';
 import { deletePost } from '@/actions';
 import DeleteButton from '@/components/common/delete-button';
 import { fetchPostById } from '@/db/queries/posts';
+import Image from 'next/image';
 
 interface PostShowProps {
   postId: string;
@@ -40,12 +41,12 @@ export default async function PostShow({ postId }: PostShowProps) {
         )}
       </div>
       <h1 className="text-2xl font-bold mb-3">{post.title}</h1>
-      <div className="flex items-center gap-2 mb-5 text-sm text-gray-400">
+      <div className="flex items-center gap-2 mb-5 text-sm text-gray-500">
         {post.user.image && (
-          <img src={post.user.image} alt={post.user.name || ''} className="w-6 h-6 rounded-full" />
+          <Image src={post.user.image} alt={post.user.name || ''} width={24} height={24} className="rounded-full" />
         )}
         <span className="text-gray-600 font-medium">{post.user.name}</span>
-        <span>·</span>
+        <span className="text-gray-400">·</span>
         <span>{formattedDate}</span>
       </div>
       <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{post.content}</p>

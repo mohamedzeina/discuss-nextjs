@@ -61,9 +61,12 @@ export default function CommentCreateForm({
 
   if (startOpen) {
     return (
-      <div className="bg-white border rounded-xl p-4 shadow-sm">
-        <h2 className="text-sm font-semibold text-gray-700 mb-3">Leave a comment</h2>
-        {form}
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+        <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
+        <div className="p-4">
+          <h2 className="text-sm font-semibold text-gray-700 mb-3">Leave a comment</h2>
+          {form}
+        </div>
       </div>
     );
   }
@@ -73,7 +76,7 @@ export default function CommentCreateForm({
       <Button
         size="sm"
         variant="light"
-        className="text-indigo-600 hover:text-indigo-800 font-medium px-0"
+        className="text-indigo-600 hover:text-indigo-800 font-medium px-0 cursor-pointer"
         onClick={() => setOpen(!open)}
       >
         {open ? 'Cancel' : 'Reply'}
