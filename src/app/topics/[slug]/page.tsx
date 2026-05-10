@@ -23,24 +23,33 @@ export default async function TopicShowPage({ params }: TopicShowPageProps) {
 
   return (
     <div className="p-6">
-      <Link href="/" className="text-sm text-indigo-600 hover:underline mb-4 inline-block">
+      <Link
+        href="/"
+        className="inline-flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors mb-4"
+      >
         ← Back to home
       </Link>
-      <div className="bg-indigo-600 text-white rounded-xl p-6 mb-6">
-        <h1 className="text-2xl font-bold capitalize">{slug}</h1>
-        <p className="text-indigo-100 text-sm mt-1">{topic.description}</p>
-        <p className="text-indigo-200 text-xs mt-2">{topic._count.posts} {topic._count.posts === 1 ? 'post' : 'posts'}</p>
+      <div className="bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 text-white rounded-2xl p-6 sm:p-8 mb-6">
+        <h1 className="text-3xl font-bold capitalize mb-1">{slug}</h1>
+        <p className="text-indigo-100 text-sm max-w-lg mb-4">{topic.description}</p>
+        <div className="bg-white/10 rounded-xl px-4 py-2 inline-flex flex-col items-center">
+          <p className="text-2xl font-bold">{topic._count.posts}</p>
+          <p className="text-indigo-200 text-xs">{topic._count.posts === 1 ? 'post' : 'posts'}</p>
+        </div>
       </div>
-      <div className="grid grid-cols-4 gap-6">
-        <div className="col-span-3">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="lg:col-span-3">
           <PostList
             fetchData={() => fetchPostByTopicSlug(slug)}
             hideTopic
             emptyMessage={`No posts in ${slug} yet — be the first!`}
           />
         </div>
-        <div className="bg-white border rounded-lg p-4 h-fit shadow-sm sticky top-20">
-          <PostCreateForm slug={slug} />
+        <div className="hidden lg:block bg-white border border-gray-200 rounded-xl h-fit shadow-sm sticky top-20 overflow-hidden">
+          <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
+          <div className="p-4">
+            <PostCreateForm slug={slug} />
+          </div>
         </div>
       </div>
     </div>
