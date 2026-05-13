@@ -1,25 +1,43 @@
 import { db } from '@/db';
 import Link from 'next/link';
 import paths from '@/paths';
+import { topicTone } from '@/lib/utils';
 
 export default async function TopicList() {
-  const topics = await db.topic.findMany();
+  const topics = await db.topic.findMany({
+    include: { _count: { select: { posts: true } } },
+    orderBy: { posts: { _count: 'desc' } },
+  });
 
   if (topics.length === 0) {
-    return <p className="text-sm text-gray-500">No topics yet</p>;
+    return (
+      <p className="text-sm text-ink-2 italic">No topics yet — start one above.</p>
+    );
   }
 
   return (
-    <div className="flex flex-row gap-2 flex-wrap">
-      {topics.map((topic) => (
-        <Link
-          key={topic.id}
-          href={paths.topicShow(topic.slug)}
-          className="text-xs font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 hover:text-purple-900 px-2.5 py-1 rounded-full transition-colors duration-200 motion-reduce:transition-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
-        >
-          {topic.slug}
-        </Link>
-      ))}
-    </div>
+    <ul className="flex flex-wrap gap-1.5">
+      {topics.map((topic) => {
+        const tone = topicTone(topic.slug);
+        const count = topic._count.posts;
+        return (
+          <li key={topic.id}>
+            <Link
+              href={paths.topicShow(topic.slug)}
+              className={`group inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${tone.bg} ${tone.text} hover:shadow-soft hover:-translate-y-0.5 transition-all duration-200 motion-reduce:transition-none`}
+              title={`${count} ${count === 1 ? 'post' : 'posts'} in #${topic.slug}`}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full ${tone.dot}`} />
+              <span className="lowercase">{topic.slug}</span>
+              {count > 0 && (
+                <span className="font-mono num-plate opacity-60 group-hover:opacity-90 transition-opacity duration-200 motion-reduce:transition-none">
+                  · {count}
+                </span>
+              )}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

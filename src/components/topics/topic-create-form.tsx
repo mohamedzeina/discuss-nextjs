@@ -3,7 +3,6 @@
 import { useFormState } from 'react-dom';
 import {
   Input,
-  Button,
   Textarea,
   Popover,
   PopoverTrigger,
@@ -12,31 +11,74 @@ import {
 import FormButton from '../common/formButton';
 import * as actions from '@/actions';
 
+const inputClassNames = {
+  inputWrapper:
+    'bg-cream-2/40 border border-rule data-[hover=true]:border-rule-2 group-data-[focus=true]:border-persimmon group-data-[focus=true]:bg-surface shadow-none rounded-xl',
+  input: 'text-ink placeholder:text-ink-3 text-sm',
+  label: 'text-ink text-xs font-semibold',
+  errorMessage: 'text-persimmon-deep text-xs font-medium',
+};
+
 export default function TopicCreateForm() {
   const [formState, action] = useFormState(actions.createTopic, {
     errors: {},
   });
 
   return (
-    <Popover placement="left">
+    <Popover placement="bottom" offset={8}>
       <PopoverTrigger>
-        <Button className="w-full bg-indigo-600 text-white font-semibold">Create a Topic</Button>
+        <button
+          type="button"
+          className="group w-full inline-flex items-center justify-center gap-2 h-10 px-4 rounded-full bg-ink text-cream text-sm font-semibold hover:bg-persimmon active:scale-[0.99] transition-all duration-200 motion-reduce:transition-none shadow-soft"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.4}
+            strokeLinecap="round"
+            className="w-4 h-4 transition-transform duration-300 motion-reduce:transition-none group-hover:rotate-90"
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          Create a topic
+        </button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 overflow-hidden w-80">
-        <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
+      <PopoverContent className="p-0 overflow-hidden rounded-2xl border border-rule bg-surface shadow-lift-lg w-[20rem]">
         <form action={action}>
-          <div className="flex flex-col gap-4 p-5">
-            <div>
-              <h3 className="text-base font-semibold text-gray-800">Create a Topic</h3>
-              <p className="text-xs text-gray-500 mt-0.5">Lowercase letters and dashes only</p>
+          <div className="flex items-start gap-3 px-5 pt-5 pb-3 border-b border-rule">
+            <div className="w-9 h-9 rounded-xl bg-persimmon-soft text-persimmon-deep flex items-center justify-center shrink-0">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-4 h-4"
+              >
+                <path d="M3 7h18M3 12h18M3 17h12" />
+              </svg>
             </div>
+            <div>
+              <h3 className="font-display font-bold text-base text-ink leading-tight">
+                Start a topic
+              </h3>
+              <p className="text-xs text-ink-2 mt-0.5 leading-snug">
+                A room for one subject. Lowercase letters and dashes only.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4 p-5">
             <Input
               name="name"
-              label="Name"
+              label="Slug"
               labelPlacement="outside"
-              placeholder="e.g. react-tips"
+              placeholder="e.g. cooking-tips"
               isInvalid={!!formState.errors.name}
               errorMessage={formState.errors.name?.join(', ')}
+              classNames={inputClassNames}
             />
             <Textarea
               name="description"
@@ -45,18 +87,27 @@ export default function TopicCreateForm() {
               placeholder="What is this topic about?"
               isInvalid={!!formState.errors.description}
               errorMessage={formState.errors.description?.join(', ')}
+              classNames={inputClassNames}
             />
 
             {formState.errors._form && (
-              <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-300 rounded-lg text-red-700 text-sm">
-                <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-.75-4.75a.75.75 0 001.5 0v-4.5a.75.75 0 00-1.5 0v4.5zm.75-7.5a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+              <div className="flex items-start gap-2 px-3 py-2.5 bg-persimmon-soft border border-persimmon/30 rounded-xl text-persimmon-deep text-sm">
+                <svg
+                  className="w-4 h-4 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm-.75-4.75a.75.75 0 001.5 0v-4.5a.75.75 0 00-1.5 0v4.5zm.75-7.5a1 1 0 100-2 1 1 0 000 2z"
+                    clipRule="evenodd"
+                  />
                 </svg>
-                {formState.errors._form.join(', ')}
+                <span>{formState.errors._form.join(', ')}</span>
               </div>
             )}
 
-            <FormButton>Create Topic</FormButton>
+            <FormButton>Create topic</FormButton>
           </div>
         </form>
       </PopoverContent>

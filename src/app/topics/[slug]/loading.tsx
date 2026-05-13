@@ -1,34 +1,33 @@
 import { Skeleton } from '@nextui-org/react';
+import PostListSkeleton from '@/components/posts/post-list-skeleton';
 
 export default function TopicShowLoading() {
   return (
-    <div className="px-4 py-6 sm:px-6">
-      <Skeleton className="h-4 w-28 rounded mb-4" />
-      <div className="bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 rounded-2xl p-6 sm:p-8 mb-6">
-        <Skeleton className="h-9 w-40 rounded mb-2 bg-white/20" />
-        <Skeleton className="h-4 w-64 rounded mb-4 bg-white/20" />
-        <Skeleton className="h-14 w-20 rounded-xl bg-white/20" />
+    <div className="py-8 sm:py-10">
+      <Skeleton className="h-4 w-32 rounded mb-6 bg-cream-2" />
+
+      <div className="rounded-3xl border border-rule bg-cream-2/60 px-6 sm:px-10 py-8 sm:py-10 space-y-3">
+        <div className="flex gap-2">
+          <Skeleton className="h-5 w-16 rounded-full bg-cream-2" />
+          <Skeleton className="h-5 w-20 rounded-full bg-cream-2" />
+        </div>
+        <Skeleton className="h-10 w-48 rounded bg-cream-2" />
+        <Skeleton className="h-4 w-2/3 rounded bg-cream-2" />
+        <Skeleton className="h-4 w-1/2 rounded bg-cream-2" />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <div className="lg:col-span-3 space-y-3">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="bg-white border-l-4 border-l-gray-200 border border-gray-200 rounded-lg p-4 space-y-2">
-              <Skeleton className="h-5 w-3/4 rounded" />
-              <Skeleton className="h-4 w-full rounded" />
-              <Skeleton className="h-4 w-2/3 rounded" />
-              <div className="flex gap-2 pt-1">
-                <Skeleton className="h-3 w-20 rounded" />
-                <Skeleton className="h-3 w-16 rounded" />
-              </div>
-            </div>
-          ))}
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
+        <div className="lg:col-span-8">
+          <Skeleton className="h-8 w-56 rounded mb-5 bg-cream-2" />
+          <PostListSkeleton />
         </div>
-        <div className="hidden lg:block bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-          <div className="h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
-          <div className="p-4">
-            <Skeleton className="h-9 w-full rounded-lg" />
+        <aside className="hidden lg:block lg:col-span-4">
+          <div className="rounded-2xl border border-rule bg-surface p-5 space-y-3">
+            <Skeleton className="h-4 w-40 rounded bg-cream-2" />
+            <Skeleton className="h-3 w-full rounded bg-cream-2" />
+            <Skeleton className="h-10 w-full rounded-full bg-cream-2" />
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );
