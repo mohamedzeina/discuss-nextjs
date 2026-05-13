@@ -5,19 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Textarea } from '@nextui-org/react';
 import FormButton from '@/components/common/formButton';
 import * as actions from '@/actions';
+import { inputClassNames as textareaClassNames } from '@/lib/form-classes';
 
 interface CommentCreateFormProps {
   postId: string;
   parentId?: string;
   startOpen?: boolean;
 }
-
-const textareaClassNames = {
-  inputWrapper:
-    'bg-cream-2/40 border border-rule data-[hover=true]:border-rule-2 group-data-[focus=true]:border-persimmon group-data-[focus=true]:bg-surface shadow-none rounded-xl',
-  input: 'text-ink placeholder:text-ink-3 text-sm',
-  errorMessage: 'text-persimmon-deep text-xs font-medium',
-};
 
 export default function CommentCreateForm({
   postId,

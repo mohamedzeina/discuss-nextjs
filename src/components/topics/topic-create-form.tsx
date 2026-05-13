@@ -11,14 +11,7 @@ import {
 } from '@nextui-org/react';
 import FormButton from '../common/formButton';
 import * as actions from '@/actions';
-
-const inputClassNames = {
-  inputWrapper:
-    'bg-cream-2/40 border border-rule data-[hover=true]:border-rule-2 group-data-[focus=true]:border-persimmon group-data-[focus=true]:bg-surface shadow-none rounded-xl',
-  input: 'text-ink placeholder:text-ink-3 text-sm',
-  label: 'text-ink text-xs font-semibold',
-  errorMessage: 'text-persimmon-deep text-xs font-medium',
-};
+import { inputClassNames } from '@/lib/form-classes';
 
 export default function TopicCreateForm() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

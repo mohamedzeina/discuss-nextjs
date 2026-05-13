@@ -7,25 +7,14 @@ import * as actions from '@/actions';
 import Link from 'next/link';
 import paths from '@/paths';
 import { topicTone } from '@/lib/utils';
+import {
+  inputClassNamesLg as inputClassNames,
+  textareaClassNamesLg as textareaClassNames,
+} from '@/lib/form-classes';
 
 interface PostCreatePageProps {
   params: { slug: string };
 }
-
-const inputClassNames = {
-  inputWrapper:
-    'bg-cream-2/40 border border-rule data-[hover=true]:border-rule-2 group-data-[focus=true]:border-persimmon group-data-[focus=true]:bg-surface shadow-none rounded-xl h-12',
-  input: 'text-ink placeholder:text-ink-3 text-base',
-  label: 'text-ink text-xs font-semibold',
-  errorMessage: 'text-persimmon-deep text-xs font-medium',
-};
-
-const textareaClassNames = {
-  ...inputClassNames,
-  inputWrapper:
-    'bg-cream-2/40 border border-rule data-[hover=true]:border-rule-2 group-data-[focus=true]:border-persimmon group-data-[focus=true]:bg-surface shadow-none rounded-xl',
-  input: 'text-ink placeholder:text-ink-3 text-base leading-relaxed',
-};
 
 export default function PostCreatePage({ params }: PostCreatePageProps) {
   const { slug } = params;
