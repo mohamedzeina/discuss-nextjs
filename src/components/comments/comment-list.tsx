@@ -5,37 +5,60 @@ interface CommentListProps {
   postId: string;
 }
 
-// TODO: Get a list of comments from somewhere
 export default async function CommentList({ postId }: CommentListProps) {
   const comments = await fetchCommentsByPostId(postId);
 
   const topLevelComments = comments.filter(
     (comment) => comment.parentId === null
   );
-  const renderedComments = topLevelComments.map((comment) => {
-    return (
-      <CommentShow key={comment.id} commentId={comment.id} postId={postId} />
-    );
-  });
-
   const activeCount = comments.filter((c) => !c.deleted).length;
 
   return (
-    <div className="space-y-3">
-      <h2 className="text-base font-semibold text-gray-700">
-        {activeCount} {activeCount === 1 ? 'comment' : 'comments'}
-      </h2>
-      {renderedComments.length === 0 ? (
-        <div className="text-center py-10 rounded-lg border border-dashed border-gray-200 bg-gray-50">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-gray-300 mx-auto mb-3">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
-          </svg>
-          <p className="text-sm font-medium text-gray-600">No comments yet</p>
-          <p className="text-xs text-gray-500 mt-1">Be the first to share your thoughts</p>
+    <section aria-label="Comments">
+      <header className="flex items-baseline justify-between mb-4">
+        <h2 className="font-display font-bold text-xl text-ink tracking-tight">
+          {activeCount === 0
+            ? 'The discussion'
+            : `${activeCount} ${activeCount === 1 ? 'reply' : 'replies'}`}
+        </h2>
+        {activeCount > 0 && (
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-2">
+            Newest at the top
+          </span>
+        )}
+      </header>
+
+      {topLevelComments.length === 0 ? (
+        <div className="text-center py-12 rounded-2xl border border-dashed border-rule-2 bg-cream-2/30">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-persimmon-soft mb-3">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-5 h-5 text-persimmon-deep"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <p className="font-display font-bold text-sm text-ink">
+            Quiet in here&hellip;
+          </p>
+          <p className="mt-1 text-xs text-ink-2">
+            Be the first to share your thoughts.
+          </p>
         </div>
       ) : (
-        renderedComments
+        <ul className="space-y-3">
+          {topLevelComments.map((comment) => (
+            <li key={comment.id}>
+              <CommentShow commentId={comment.id} postId={postId} />
+            </li>
+          ))}
+        </ul>
       )}
-    </div>
+    </section>
   );
 }

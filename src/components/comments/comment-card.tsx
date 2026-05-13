@@ -22,9 +22,15 @@ interface CommentCardProps {
   children?: React.ReactNode;
 }
 
-export default function CommentCard({ comment, isOwner, hasReplies, children }: CommentCardProps) {
+export default function CommentCard({
+  comment,
+  isOwner,
+  hasReplies,
+  children,
+}: CommentCardProps) {
   const [deleted, setDeleted] = useState(comment.deleted);
   const [hidden, setHidden] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   const handleSuccess = () => {
     if (hasReplies) {
@@ -38,58 +44,106 @@ export default function CommentCard({ comment, isOwner, hasReplies, children }: 
 
   if (deleted) {
     return (
-      <div className="bg-white border rounded-xl p-4 shadow-sm">
-        <p className="text-sm text-gray-400 italic">[deleted]</p>
+      <div className="rounded-2xl border border-dashed border-rule-2 bg-cream-2/40 px-4 py-3">
+        <p className="text-sm text-ink-3 italic">
+          [comment deleted]
+        </p>
         {children && (
-          <div className="mt-4 pl-4 border-l-2 border-indigo-100 space-y-3">{children}</div>
+          <ThreadChildren>{children}</ThreadChildren>
         )}
       </div>
     );
   }
 
+  const initial = comment.user.name?.[0]?.toUpperCase() ?? '?';
+
   return (
-    <div className="bg-white border rounded-xl p-4 shadow-sm">
-      <div className="flex gap-3">
-        {comment.user.image ? (
-          <Image
-            src={comment.user.image}
-            alt={comment.user.name || 'user'}
-            width={32}
-            height={32}
-            className="w-8 h-8 rounded-full flex-shrink-0"
-          />
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-            <span className="text-xs font-semibold text-indigo-600">
-              {comment.user.name?.[0]?.toUpperCase() ?? '?'}
-            </span>
-          </div>
-        )}
-        <div className="flex-1">
-          <div className="flex items-center justify-between mb-1">
-            <div className="flex items-center gap-2">
-              <p className="text-sm font-semibold text-gray-700">{comment.user.name}</p>
-              <span className="text-xs text-gray-500" suppressHydrationWarning>
-                {timeAgo(comment.createdAt)}
+    <div className="rounded-2xl border border-rule bg-surface shadow-soft transition-shadow duration-200 motion-reduce:transition-none hover:shadow-lift/40">
+      <div className="flex gap-3 p-4">
+        {/* Avatar column with collapse rail */}
+        <div className="flex flex-col items-center shrink-0">
+          {comment.user.image ? (
+            <Image
+              src={comment.user.image}
+              alt={comment.user.name || 'user'}
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-full ring-1 ring-rule"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-persimmon-soft text-persimmon-deep text-xs font-semibold flex items-center justify-center">
+              {initial}
+            </div>
+          )}
+          {children && (
+            <button
+              type="button"
+              onClick={() => setCollapsed((c) => !c)}
+              aria-label={collapsed ? 'Expand replies' : 'Collapse replies'}
+              title={collapsed ? 'Expand replies' : 'Collapse replies'}
+              className="group mt-2 flex-1 w-[3px] rounded-full bg-rule hover:bg-persimmon transition-colors duration-150 motion-reduce:transition-none min-h-[20px]"
+            >
+              <span className="sr-only">
+                {collapsed ? 'Expand replies' : 'Collapse replies'}
               </span>
+            </button>
+          )}
+        </div>
+
+        {/* Body */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between gap-2 mb-1">
+            <div className="flex items-baseline flex-wrap gap-x-2">
+              <span className="text-sm font-semibold text-ink">
+                {comment.user.name}
+              </span>
+              <span className="w-0.5 h-0.5 rounded-full bg-ink-3" aria-hidden />
+              <time
+                dateTime={comment.createdAt.toISOString()}
+                className="text-[11px] font-mono text-ink-2"
+                suppressHydrationWarning
+              >
+                {timeAgo(comment.createdAt)}
+              </time>
             </div>
             {isOwner && (
               <DeleteButton
                 action={deleteComment.bind(null, comment.id)}
-                confirmMessage="Are you sure?"
+                confirmMessage="Delete this comment?"
                 onSuccess={handleSuccess}
               />
             )}
           </div>
-          <p className="text-sm text-gray-700 leading-relaxed">{comment.content}</p>
+
+          <p className="text-sm text-ink-2 leading-[1.65] whitespace-pre-wrap">
+            {comment.content}
+          </p>
+
           <div className="mt-2">
             <CommentCreateForm postId={comment.postId} parentId={comment.id} />
           </div>
         </div>
       </div>
-      {children && (
-        <div className="mt-4 pl-4 border-l-2 border-indigo-100 space-y-3">{children}</div>
+
+      {children && !collapsed && <ThreadChildren>{children}</ThreadChildren>}
+
+      {children && collapsed && (
+        <button
+          type="button"
+          onClick={() => setCollapsed(false)}
+          className="w-full px-4 py-2 text-left text-xs font-mono uppercase tracking-[0.12em] text-ink-2 hover:text-persimmon border-t border-rule transition-colors duration-150 motion-reduce:transition-none"
+        >
+          + show replies
+        </button>
       )}
+    </div>
+  );
+}
+
+function ThreadChildren({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="pl-5 pr-4 pb-4 pt-1">
+      <div className="pl-4 border-l-2 border-rule space-y-3">{children}</div>
     </div>
   );
 }

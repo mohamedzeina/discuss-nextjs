@@ -34,33 +34,52 @@ export default function DeleteButton({
 
   if (confirming) {
     return (
-      <div className="flex items-center gap-2">
-        <span className="text-xs text-gray-500">{confirmMessage}</span>
+      <div className="inline-flex items-center gap-2 rounded-full bg-persimmon-soft border border-persimmon/30 pl-3 pr-1 py-1">
+        <span className="text-[11px] font-medium text-persimmon-deep">
+          {confirmMessage}
+        </span>
         <button
+          type="button"
           onClick={handleConfirm}
           disabled={pending}
-          className="text-xs text-red-500 hover:text-red-700 font-medium disabled:opacity-40 transition-colors motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-red-400 rounded"
+          className="h-6 px-2.5 rounded-full bg-persimmon-deep text-white text-[11px] font-semibold hover:bg-persimmon transition-colors duration-150 motion-reduce:transition-none disabled:opacity-50"
         >
-          {pending ? 'Deleting...' : 'Yes'}
+          {pending ? 'Deleting…' : 'Yes'}
         </button>
         <button
+          type="button"
           onClick={() => setConfirming(false)}
           disabled={pending}
-          className="text-xs text-gray-400 hover:text-gray-600 font-medium disabled:opacity-40 transition-colors motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
+          className="h-6 px-2 rounded-full text-[11px] font-medium text-ink-2 hover:text-ink hover:bg-cream transition-colors duration-150 motion-reduce:transition-none disabled:opacity-50"
         >
           Cancel
         </button>
-        {error && <p className="text-xs text-red-500">{error}</p>}
+        {error && (
+          <span className="text-[11px] font-medium text-persimmon-deep">{error}</span>
+        )}
       </div>
     );
   }
 
   return (
     <button
+      type="button"
       onClick={() => setConfirming(true)}
-      className="text-xs text-red-500 hover:text-red-700 font-medium transition-colors motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-red-400 rounded"
+      aria-label={label}
+      className="group inline-flex items-center gap-1 h-7 px-2 rounded-full text-xs font-medium text-ink-3 hover:text-persimmon-deep hover:bg-persimmon-soft transition-colors duration-150 motion-reduce:transition-none"
     >
-      {label}
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-3.5 h-3.5"
+      >
+        <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14" />
+      </svg>
+      <span className="hidden sm:inline">{label}</span>
     </button>
   );
 }

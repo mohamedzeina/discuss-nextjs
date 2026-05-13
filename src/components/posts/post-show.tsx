@@ -1,9 +1,12 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { auth } from '@/auth';
 import { deletePost } from '@/actions';
 import DeleteButton from '@/components/common/delete-button';
 import { fetchPostById } from '@/db/queries/posts';
-import Image from 'next/image';
+import paths from '@/paths';
+import { topicTone, timeAgo } from '@/lib/utils';
 
 interface PostShowProps {
   postId: string;
@@ -25,31 +28,74 @@ export default async function PostShow({ postId }: PostShowProps) {
     year: 'numeric',
   });
 
+  const tone = topicTone(post.topic.slug);
   const isOwner = session?.user?.id === post.userId;
 
   return (
-    <div className="bg-white border rounded-xl p-6 shadow-sm">
-      <div className="flex items-start justify-between mb-3">
-        <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">
-          #{post.topic.slug}
-        </span>
-        {isOwner && (
-          <DeleteButton
-            action={deletePost.bind(null, post.id)}
-            confirmMessage="Delete this post? All comments will also be removed."
-          />
-        )}
+    <article className="rounded-3xl border border-rule bg-surface shadow-soft overflow-hidden">
+      {/* Tone band that ties the post to its topic */}
+      <div className={`h-1.5 ${tone.dot}`} aria-hidden />
+
+      <div className="px-6 sm:px-8 py-7 sm:py-8">
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <Link
+            href={paths.topicShow(post.topic.slug)}
+            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${tone.bg} ${tone.text} hover:shadow-soft hover:-translate-y-0.5 transition-all duration-200 motion-reduce:transition-none`}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${tone.dot}`} />
+            <span className="lowercase">{post.topic.slug}</span>
+          </Link>
+          {isOwner && (
+            <DeleteButton
+              action={deletePost.bind(null, post.id)}
+              confirmMessage="Delete this post? All comments will also be removed."
+            />
+          )}
+        </div>
+
+        <h1 className="font-display font-extrabold tracking-tight text-3xl sm:text-4xl text-ink leading-[1.1]">
+          {post.title}
+        </h1>
+
+        <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-ink-2">
+          <div className="flex items-center gap-2">
+            {post.user.image ? (
+              <Image
+                src={post.user.image}
+                alt={post.user.name || ''}
+                width={24}
+                height={24}
+                className="rounded-full ring-1 ring-rule"
+              />
+            ) : (
+              <span className="w-6 h-6 rounded-full bg-persimmon-soft text-[10px] font-semibold text-persimmon-deep flex items-center justify-center">
+                {post.user.name?.[0]?.toUpperCase() ?? '?'}
+              </span>
+            )}
+            <span className="font-semibold text-ink">{post.user.name}</span>
+          </div>
+          <span className="w-1 h-1 rounded-full bg-ink-3" aria-hidden />
+          <time
+            dateTime={post.createdAt.toISOString()}
+            className="font-mono num-plate text-xs"
+          >
+            {formattedDate}
+          </time>
+          <span className="w-1 h-1 rounded-full bg-ink-3 hidden sm:inline-block" aria-hidden />
+          <span
+            className="font-mono text-xs text-ink-3 hidden sm:inline"
+            suppressHydrationWarning
+          >
+            {timeAgo(post.createdAt)}
+          </span>
+        </div>
+
+        <div className="mt-6 h-px bg-rule" />
+
+        <p className="mt-6 text-ink-2 text-base sm:text-[17px] leading-[1.75] whitespace-pre-wrap">
+          {post.content}
+        </p>
       </div>
-      <h1 className="text-2xl font-bold mb-3">{post.title}</h1>
-      <div className="flex items-center gap-2 mb-5 text-sm text-gray-500">
-        {post.user.image && (
-          <Image src={post.user.image} alt={post.user.name || ''} width={24} height={24} className="rounded-full" />
-        )}
-        <span className="text-gray-600 font-medium">{post.user.name}</span>
-        <span className="text-gray-400">·</span>
-        <span>{formattedDate}</span>
-      </div>
-      <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{post.content}</p>
-    </div>
+    </article>
   );
 }
