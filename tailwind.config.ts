@@ -6,39 +6,41 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--font-display)', 'Georgia', 'serif'],
+        display: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
-        paper: '#F4EFE6',
-        'paper-2': '#EBE4D5',
-        ink: '#161623',
-        'ink-2': '#2A2A3D',
-        ember: '#C4471C',
-        'ember-2': '#E55A23',
-        slate: {
-          'ink': '#2D4A6B',
-        },
-        sage: '#7A8569',
+        cream: '#FAF7F2',
+        'cream-2': '#F2EDE3',
+        surface: '#FFFFFF',
+        ink: '#1A1614',
+        'ink-2': '#5C544E',
+        'ink-3': '#A8A29E',
+        rule: '#EAE4D7',
+        'rule-2': '#DDD5C5',
+        persimmon: '#E5533D',
+        'persimmon-soft': '#FBE8E3',
+        'persimmon-deep': '#C2402B',
+        teal: '#0F6E64',
+        'teal-soft': '#DDEFEC',
+      },
+      boxShadow: {
+        'soft': '0 1px 2px rgba(26, 22, 20, 0.04), 0 0 0 1px rgba(26, 22, 20, 0.04)',
+        'lift': '0 4px 12px -2px rgba(26, 22, 20, 0.08), 0 2px 4px -2px rgba(26, 22, 20, 0.06)',
+        'lift-lg': '0 12px 28px -6px rgba(26, 22, 20, 0.12), 0 6px 12px -4px rgba(26, 22, 20, 0.06)',
+        'inset-rule': 'inset 0 0 0 1px #EAE4D7',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "paper-grain":
-          "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.08 0 0 0 0 0.14 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-      },
-      boxShadow: {
-        'brut': '4px 4px 0 0 #161623',
-        'brut-sm': '2px 2px 0 0 #161623',
-        'brut-lg': '6px 6px 0 0 #161623',
-        'brut-ember': '4px 4px 0 0 #C4471C',
       },
     },
   },

@@ -22,53 +22,65 @@ export default function HeaderAuth() {
   }, []);
 
   if (session.status === 'loading') {
-    return <div className="w-9 h-9 border-2 border-ink/20 bg-paper-2 animate-pulse" />;
+    return <div className="w-9 h-9 rounded-full bg-rule animate-pulse" />;
   }
 
   if (session.data?.user) {
     const user = session.data.user;
+    const initial = user.name?.[0]?.toUpperCase() ?? '?';
     return (
       <div ref={ref} className="relative">
         <button
           onClick={() => setOpen((o) => !o)}
-          className="group flex items-center gap-2.5 border-2 border-ink/30 hover:border-ink bg-paper px-2 py-1.5 transition-colors duration-200 motion-reduce:transition-none"
+          className="group flex items-center gap-2 rounded-full p-0.5 pr-3 bg-surface border border-rule hover:border-rule-2 hover:shadow-soft transition-all duration-200 motion-reduce:transition-none"
+          aria-haspopup="menu"
+          aria-expanded={open}
         >
           {user.image ? (
             <Image
               src={user.image}
               alt={user.name || ''}
-              width={24}
-              height={24}
-              className="w-6 h-6 grayscale-[20%] group-hover:grayscale-0 transition-[filter] duration-200 motion-reduce:transition-none"
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-full"
             />
           ) : (
-            <div className="w-6 h-6 bg-ink text-paper text-[10px] font-mono uppercase flex items-center justify-center">
-              {user.name?.[0] ?? '?'}
+            <div className="w-8 h-8 rounded-full bg-persimmon-soft text-persimmon-deep text-sm font-semibold flex items-center justify-center">
+              {initial}
             </div>
           )}
-          <span className="hidden md:inline text-xs font-mono uppercase tracking-[0.12em] text-ink">
+          <span className="hidden md:inline text-sm font-medium text-ink max-w-[120px] truncate">
             {user.name}
           </span>
-          <svg viewBox="0 0 20 20" fill="currentColor" className={`w-3 h-3 text-ink/50 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}>
+          <svg viewBox="0 0 20 20" fill="currentColor" className={`w-3.5 h-3.5 text-ink-2 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}>
             <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
           </svg>
         </button>
 
         {open && (
-          <div className="absolute right-0 top-full mt-2 w-64 bg-paper border-2 border-ink shadow-brut z-50 rise">
-            <div className="px-4 py-3 border-b border-ink/15">
-              <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-ink/50 mb-1">
+          <div
+            className="absolute right-0 top-full mt-2 w-64 bg-surface border border-rule rounded-2xl shadow-lift-lg z-50 rise overflow-hidden"
+            role="menu"
+          >
+            <div className="px-4 py-3 border-b border-rule bg-cream-2/40">
+              <p className="text-xs font-mono uppercase tracking-wide text-ink-2 mb-0.5">
                 Signed in as
-              </div>
-              <div className="font-display font-bold text-base text-ink truncate">{user.name}</div>
-              <div className="text-xs font-mono text-ink/60 truncate">{user.email}</div>
+              </p>
+              <p className="font-semibold text-sm text-ink truncate">{user.name}</p>
+              <p className="text-xs text-ink-2 truncate font-mono">{user.email}</p>
             </div>
             <button
               onClick={() => { setOpen(false); signOut({ callbackUrl: '/' }); }}
-              className="w-full flex items-center justify-between px-4 py-3 text-sm font-mono uppercase tracking-[0.14em] text-ink hover:bg-ember hover:text-paper transition-colors duration-150 motion-reduce:transition-none"
+              className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-ink hover:bg-persimmon-soft hover:text-persimmon-deep transition-colors duration-150 motion-reduce:transition-none"
+              role="menuitem"
             >
-              <span>Sign out</span>
-              <span aria-hidden>&rarr;</span>
+              <span className="flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+                </svg>
+                Sign out
+              </span>
+              <span aria-hidden className="text-ink-3">&rarr;</span>
             </button>
           </div>
         )}
@@ -81,9 +93,9 @@ export default function HeaderAuth() {
   return (
     <button
       onClick={() => signIn()}
-      className="group relative inline-flex items-center gap-2 px-4 py-2 bg-ink text-paper border-2 border-ink font-mono text-xs uppercase tracking-[0.16em] hover:bg-ember hover:border-ember transition-colors duration-200 motion-reduce:transition-none shadow-brut-sm hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+      className="group inline-flex items-center gap-1.5 px-4 h-10 rounded-full bg-ink text-cream text-sm font-semibold hover:bg-persimmon active:scale-[0.98] transition-all duration-200 motion-reduce:transition-none shadow-soft"
     >
-      <span>Sign in</span>
+      Sign in
       <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none">&rarr;</span>
     </button>
   );

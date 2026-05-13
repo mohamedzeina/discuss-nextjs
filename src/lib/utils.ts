@@ -5,3 +5,24 @@ export function timeAgo(date: Date): string {
   if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
   return `${Math.floor(seconds / 86400)}d ago`;
 }
+
+const TOPIC_PALETTE = [
+  { bg: 'bg-[#FDE8E0]', text: 'text-[#9C3D24]', dot: 'bg-[#C25636]' }, // terracotta
+  { bg: 'bg-[#E4EBDF]', text: 'text-[#3F5733]', dot: 'bg-[#5F7A4D]' }, // sage
+  { bg: 'bg-[#EDE2EE]', text: 'text-[#6B3D6E]', dot: 'bg-[#8A5790]' }, // plum
+  { bg: 'bg-[#DBEDEB]', text: 'text-[#1F5A55]', dot: 'bg-[#357973]' }, // teal
+  { bg: 'bg-[#F5EDD3]', text: 'text-[#6B5421]', dot: 'bg-[#9A7B30]' }, // mustard
+  { bg: 'bg-[#E2E5F2]', text: 'text-[#3F4878]', dot: 'bg-[#5B679F]' }, // periwinkle
+  { bg: 'bg-[#F3DCC9]', text: 'text-[#7A3F1C]', dot: 'bg-[#A1582E]' }, // rust
+  { bg: 'bg-[#F4E0E1]', text: 'text-[#7C3F49]', dot: 'bg-[#A05A66]' }, // dusty rose
+] as const;
+
+export type TopicTone = (typeof TOPIC_PALETTE)[number];
+
+export function topicTone(slug: string): TopicTone {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) {
+    hash = (hash * 31 + slug.charCodeAt(i)) >>> 0;
+  }
+  return TOPIC_PALETTE[hash % TOPIC_PALETTE.length];
+}

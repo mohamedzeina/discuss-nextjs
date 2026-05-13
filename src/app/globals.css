@@ -3,60 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --paper: #F4EFE6;
-  --paper-2: #EBE4D5;
-  --ink: #161623;
-  --ink-2: #2A2A3D;
-  --ember: #C4471C;
-  --ember-2: #E55A23;
-  --slate-ink: #2D4A6B;
-  --sage: #7A8569;
-  --rule: rgba(22, 22, 35, 0.18);
+  --cream: #FAF7F2;
+  --cream-2: #F2EDE3;
+  --surface: #FFFFFF;
+  --ink: #1A1614;
+  --ink-2: #5C544E;
+  --ink-3: #A8A29E;
+  --rule: #EAE4D7;
+  --persimmon: #E5533D;
+  --persimmon-soft: #FBE8E3;
+  --persimmon-deep: #C2402B;
+  --teal: #0F6E64;
 }
 
 html,
 body {
-  background-color: var(--paper);
+  background-color: var(--cream);
   color: var(--ink);
 }
 
 body {
   position: relative;
   font-feature-settings: "ss01", "ss02", "kern", "calt";
-  /* Subtle paper grain */
-  background-image:
-    radial-gradient(circle at 20% 0%, rgba(196, 71, 28, 0.04), transparent 40%),
-    radial-gradient(circle at 80% 100%, rgba(45, 74, 107, 0.04), transparent 40%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.08 0 0 0 0 0.14 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  background-attachment: fixed;
+  text-rendering: optimizeLegibility;
 }
 
 /* Selection */
 ::selection {
-  background: var(--ember);
-  color: var(--paper);
+  background: var(--persimmon);
+  color: #FFF;
 }
 
-/* Display serif — letterforms speak first */
-.font-display {
-  font-feature-settings: "ss01", "ss02", "ss03", "kern", "calt", "liga";
-  letter-spacing: -0.02em;
-}
-
-/* Headline tracking for very large serifs */
-.tracking-editorial {
-  letter-spacing: -0.035em;
-}
-
-/* Hairline rule used as section break */
-.rule-ink {
-  border-color: var(--ink);
-}
-
-/* Brutalist focus ring */
+/* Focus */
 *:focus-visible {
-  outline: 2px solid var(--ember);
+  outline: 2px solid var(--persimmon);
   outline-offset: 2px;
+  border-radius: 6px;
 }
 
 button:focus,
@@ -64,11 +46,17 @@ a:focus {
   outline: none;
 }
 
-/* Animated entry */
+/* Tabular numbers for counts */
+.num-plate {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Entry animation */
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -77,61 +65,47 @@ a:focus {
 }
 
 .rise {
-  animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-@keyframes ink-draw {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229, 83, 61, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(229, 83, 61, 0); }
 }
 
-.ink-draw {
-  transform-origin: left center;
-  animation: ink-draw 0.6s cubic-bezier(0.65, 0, 0.35, 1) both;
-}
-
-/* Marquee strip used in hero */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.marquee {
-  animation: marquee 32s linear infinite;
+.dot-live {
+  animation: glow 2s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rise,
-  .ink-draw,
-  .marquee {
+  .dot-live {
     animation: none !important;
   }
 }
 
-/* Underline reveal for links */
+/* Hover-reveal underline for inline links */
 .ink-link {
   position: relative;
-  display: inline-block;
 }
 .ink-link::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -2px;
+  bottom: -1px;
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
   transform-origin: right center;
-  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  transition: transform 0.25s cubic-bezier(0.65, 0, 0.35, 1);
 }
 .ink-link:hover::after {
   transform: scaleX(1);
   transform-origin: left center;
 }
-
-/* Number plate (issue numbers, indices) */
-.num-plate {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum", "zero";
+@media (prefers-reduced-motion: reduce) {
+  .ink-link::after {
+    transition: none;
+  }
 }

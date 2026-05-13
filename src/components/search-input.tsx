@@ -18,23 +18,21 @@ export default function SearchInput() {
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div
-        className={`group relative flex items-center border-2 bg-paper transition-colors duration-200 motion-reduce:transition-none ${
-          focused ? 'border-ink' : 'border-ink/30 hover:border-ink/60'
+      <label
+        className={`group flex items-center gap-2.5 h-10 px-3.5 rounded-full bg-surface transition-all duration-200 motion-reduce:transition-none ${
+          focused
+            ? 'ring-2 ring-persimmon/40 border border-persimmon/60 shadow-soft'
+            : 'border border-rule hover:border-rule-2 shadow-soft'
         }`}
       >
-        {/* Index tab */}
-        <div className="hidden sm:flex items-center px-2.5 py-2 border-r border-ink/20 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
-          Index
-        </div>
-
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className={`w-4 h-4 ml-3 transition-colors duration-200 motion-reduce:transition-none ${focused ? 'text-ember' : 'text-ink/60'}`}
+          className={`w-4 h-4 transition-colors duration-200 motion-reduce:transition-none ${focused ? 'text-persimmon' : 'text-ink-2'}`}
+          aria-hidden
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
         </svg>
@@ -46,25 +44,17 @@ export default function SearchInput() {
           onChange={(e) => setValue(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          placeholder="Search the archive..."
-          className="flex-1 bg-transparent px-3 py-2 text-sm font-sans text-ink placeholder:text-ink/40 placeholder:italic focus:outline-none"
+          placeholder="Search posts, topics, people..."
+          className="flex-1 bg-transparent text-sm text-ink placeholder:text-ink-3 focus:outline-none min-w-0"
         />
 
-        <button
-          type="submit"
-          aria-label="Search"
-          className="hidden sm:flex items-center justify-center px-3 py-2 border-l border-ink/20 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/70 hover:text-ember hover:bg-ink/5 transition-colors duration-200 motion-reduce:transition-none"
-        >
-          &crarr; Go
-        </button>
-
-        {/* Underline accent on focus */}
-        <span
-          className={`absolute bottom-0 left-0 h-[3px] bg-ember transition-transform duration-300 motion-reduce:transition-none w-full origin-left ${
-            focused ? 'scale-x-100' : 'scale-x-0'
-          }`}
-        />
-      </div>
+        {value && (
+          <kbd className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded border border-rule bg-cream-2/60">
+            <span>&crarr;</span>
+            <span>enter</span>
+          </kbd>
+        )}
+      </label>
     </form>
   );
 }
