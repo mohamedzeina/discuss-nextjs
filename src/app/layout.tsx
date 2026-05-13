@@ -19,8 +19,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Discuss — Share ideas, start conversations',
-  description: 'A community discussion platform to share ideas and start conversations.',
+  title: 'Hearsay — all opinions welcome',
+  description: 'A community discussion platform where every voice gets a thread. Talk about anything, hear what people are actually saying.',
 };
 
 export default function RootLayout({
@@ -40,11 +40,11 @@ export default function RootLayout({
             <div className="container mx-auto max-w-6xl px-4 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-persimmon" />
-                <span className="font-semibold text-ink">Discuss</span>
-                <span className="text-ink-2 text-sm">&mdash; a place for good conversation</span>
+                <span className="font-semibold text-ink">Hearsay</span>
+                <span className="text-ink-2 text-sm">&mdash; all opinions welcome</span>
               </div>
               <p className="text-xs font-mono text-ink-3">
-                &copy; {new Date().getFullYear()} Discuss
+                &copy; {new Date().getFullYear()} Hearsay
               </p>
             </div>
           </footer>

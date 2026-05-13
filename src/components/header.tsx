@@ -8,15 +8,27 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-rule bg-cream/85 backdrop-blur supports-[backdrop-filter]:bg-cream/70">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="flex items-center gap-4 sm:gap-6 h-16">
-          <Link href="/" className="group flex items-center gap-2 shrink-0" aria-label="Discuss home">
-            <span className="relative inline-flex items-center justify-center w-9 h-9 rounded-2xl bg-ink text-cream transition-transform duration-200 group-hover:-rotate-6 motion-reduce:transition-none">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                <path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.3-4.5A9 9 0 1 1 21 12z" />
+          <Link
+            href="/"
+            className="group flex items-baseline gap-1.5 shrink-0"
+            aria-label="Hearsay home"
+          >
+            <span
+              aria-hidden
+              className="relative inline-flex items-center justify-center w-8 h-8 rounded-xl bg-ink text-cream transition-transform duration-200 group-hover:-rotate-3 motion-reduce:transition-none"
+            >
+              {/* Open quote glyph */}
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-3.5 h-3.5"
+              >
+                <path d="M9.5 6H6.2C5 6 4 7 4 8.2v3.3C4 12.8 5 13.8 6.2 13.8h1.6c-.1 1.6-1.1 2.7-2.4 3.4l1.2 1.6c2.1-1 4-2.8 4-6.3V8.2C10.6 7 9.6 6 8.4 6h1.1zm9 0h-3.3c-1.2 0-2.2 1-2.2 2.2v3.3c0 1.3 1 2.3 2.2 2.3h1.6c-.1 1.6-1.1 2.7-2.4 3.4l1.2 1.6c2.1-1 4-2.8 4-6.3V8.2c0-1.2-1-2.2-2.2-2.2h1.1z" />
               </svg>
-              <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-persimmon ring-2 ring-cream" />
             </span>
-            <span className="font-display font-extrabold text-xl tracking-tight text-ink">
-              discuss
+            <span className="font-display font-extrabold text-xl tracking-tight text-ink leading-none">
+              hearsay
+              <span className="text-persimmon">.</span>
             </span>
           </Link>
 

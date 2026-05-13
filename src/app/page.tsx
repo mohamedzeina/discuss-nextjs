@@ -116,7 +116,7 @@ function SignedOutHero({
 
         <p className="mt-5 max-w-lg text-base sm:text-lg text-ink-2 leading-relaxed">
           Ask hard questions, share half-formed thoughts, and read what people
-          are arguing about today. Discuss is a small community for the stuff
+          are actually saying. Hearsay is a small community for the stuff
           worth talking about.
         </p>
 
