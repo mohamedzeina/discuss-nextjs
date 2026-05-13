@@ -77,9 +77,27 @@ a:focus {
   animation: glow 2s ease-in-out infinite;
 }
 
+/* Anchor target flash for thread-map navigation */
+@keyframes target-flash {
+  0% {
+    box-shadow: 0 0 0 4px rgba(229, 83, 61, 0.3);
+    border-radius: 1rem;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+    border-radius: 1rem;
+  }
+}
+
+.comment-anchor:target {
+  animation: target-flash 1.8s ease-out;
+  border-radius: 1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
-  .dot-live {
+  .dot-live,
+  .comment-anchor:target {
     animation: none !important;
   }
 }

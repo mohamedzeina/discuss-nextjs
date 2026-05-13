@@ -53,7 +53,11 @@ export default async function CommentList({ postId }: CommentListProps) {
       ) : (
         <ul className="space-y-3">
           {topLevelComments.map((comment) => (
-            <li key={comment.id}>
+            <li
+              key={comment.id}
+              id={`c-${comment.id}`}
+              className="scroll-mt-24 comment-anchor"
+            >
               <CommentShow commentId={comment.id} postId={postId} />
             </li>
           ))}
