@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { IconSearch } from '@/components/icons';
 
 export default function SearchInput() {
   const searchParams = useSearchParams();
@@ -25,17 +26,10 @@ export default function SearchInput() {
             : 'border border-rule hover:border-rule-2 shadow-soft'
         }`}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-          className={`w-4 h-4 transition-colors duration-200 motion-reduce:transition-none ${focused ? 'text-persimmon' : 'text-ink-2'}`}
+        <IconSearch
           aria-hidden
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-        </svg>
+          className={`w-4 h-4 transition-colors duration-200 motion-reduce:transition-none ${focused ? 'text-persimmon' : 'text-ink-2'}`}
+        />
 
         <input
           name="term"

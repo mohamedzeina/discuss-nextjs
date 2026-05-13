@@ -3,6 +3,7 @@ import Image from 'next/image';
 import paths from '@/paths';
 import type { PostWithData } from '@/db/queries/posts';
 import { timeAgo, topicTone } from '@/lib/utils';
+import { IconReply } from '@/components/icons';
 
 interface PostCardProps {
   post: PostWithData;
@@ -65,17 +66,7 @@ export default function PostCard({ post, hideTopic }: PostCardProps) {
           <span className="w-1 h-1 rounded-full bg-ink-3" aria-hidden />
 
           <span className="inline-flex items-center gap-1 text-ink-2">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-3.5 h-3.5"
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
+            <IconReply className="w-3.5 h-3.5" />
             <span className="font-mono num-plate text-ink font-semibold">{replyCount}</span>
             <span>{replyCount === 1 ? 'reply' : 'replies'}</span>
           </span>

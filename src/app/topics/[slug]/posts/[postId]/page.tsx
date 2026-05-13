@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import PostShowLoading from '@/components/posts/post-show-loading';
 import CommentListLoading from '@/components/comments/comment-list-loading';
 import SurfacePanel from '@/components/common/surface-panel';
+import { IconReply } from '@/components/icons';
 
 interface PostShowPageProps {
   params: {
@@ -65,17 +66,7 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
               href="#reply"
               className="hidden lg:flex items-center justify-center gap-1.5 w-full h-10 rounded-full border border-rule bg-surface text-sm font-medium text-ink hover:border-ink-2 hover:bg-cream-2/40 transition-colors duration-200 motion-reduce:transition-none"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-4 h-4"
-              >
-                <path d="M9 17l-4 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2z" />
-              </svg>
+              <IconReply className="w-4 h-4" />
               Jump to reply
             </a>
           </div>

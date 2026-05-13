@@ -6,6 +6,7 @@ import { Textarea } from '@nextui-org/react';
 import FormButton from '@/components/common/formButton';
 import * as actions from '@/actions';
 import SurfacePanel from '@/components/common/surface-panel';
+import { IconReply } from '@/components/icons';
 import { inputClassNames as textareaClassNames } from '@/lib/form-classes';
 
 interface CommentCreateFormProps {
@@ -116,17 +117,7 @@ export default function CommentCreateForm({
           onClick={() => setOpen(true)}
           className="group inline-flex items-center gap-1.5 text-xs font-semibold text-ink-2 hover:text-persimmon transition-colors duration-150 motion-reduce:transition-none"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-3.5 h-3.5"
-          >
-            <path d="M9 17l-4 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2z" />
-          </svg>
+          <IconReply className="w-3.5 h-3.5" />
           Reply
         </button>
       )}

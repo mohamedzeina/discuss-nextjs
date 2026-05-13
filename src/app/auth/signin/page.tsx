@@ -1,6 +1,7 @@
 import { signIn } from '@/auth';
 import { db } from '@/db';
 import { topicTone } from '@/lib/utils';
+import { IconChevronRight } from '@/components/icons';
 
 export default async function SignInPage() {
   const [userCount, topicCount, postCount, topTopics] = await Promise.all([
@@ -183,17 +184,7 @@ export default async function SignInPage() {
               {/* Why GitHub small note */}
               <details className="mt-4 group">
                 <summary className="cursor-pointer list-none flex items-center gap-1.5 text-xs text-ink-2 hover:text-persimmon transition-colors duration-200 motion-reduce:transition-none">
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-3 h-3 transition-transform duration-200 group-open:rotate-90 motion-reduce:transition-none"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.21 5.23a.75.75 0 011.06 0l4.5 4.25a.75.75 0 010 1.04l-4.5 4.25a.75.75 0 11-1.04-1.08L11.18 10 7.21 6.27a.75.75 0 010-1.04z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <IconChevronRight className="w-3 h-3 transition-transform duration-200 group-open:rotate-90 motion-reduce:transition-none" />
                   Why only GitHub?
                 </summary>
                 <p className="mt-2 pl-4 text-xs text-ink-2 leading-relaxed border-l border-rule">

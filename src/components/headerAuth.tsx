@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useSession, signOut, signIn } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
+import { IconChevronDown } from '@/components/icons';
 
 export default function HeaderAuth() {
   const session = useSession();
@@ -52,9 +53,7 @@ export default function HeaderAuth() {
           <span className="hidden md:inline text-sm font-medium text-ink max-w-[120px] truncate">
             {user.name}
           </span>
-          <svg viewBox="0 0 20 20" fill="currentColor" className={`w-3.5 h-3.5 text-ink-2 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}>
-            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-          </svg>
+          <IconChevronDown className={`w-3.5 h-3.5 text-ink-2 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`} />
         </button>
 
         {open && (
