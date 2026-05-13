@@ -4,7 +4,7 @@
 
 A community discussion platform where every voice gets a thread — topics, posts, nested comments, live search. Built with Next.js 14 App Router, Postgres, and a hand-tuned warm-modern design system.
 
-**Live:** [discuss-nextjs-drab.vercel.app](https://discuss-nextjs-drab.vercel.app)
+**Live:** [hearsay-community.vercel.app](https://hearsay-community.vercel.app)
 
 ## Table of Contents
 
