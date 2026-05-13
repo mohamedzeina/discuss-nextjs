@@ -12,7 +12,7 @@ export default function Header() {
       <div className="border-b border-rule bg-cream/85 backdrop-blur supports-[backdrop-filter]:bg-cream/70">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex items-center gap-3 sm:gap-4 h-16">
-            {/* Brand */}
+            {/* Brand — left */}
             <Link
               href="/"
               className="group flex items-baseline gap-1.5 shrink-0"
@@ -38,26 +38,16 @@ export default function Header() {
               </span>
             </Link>
 
-            {/* Rule between brand and search */}
-            <span
-              aria-hidden
-              className="hidden sm:block h-7 w-px bg-rule shrink-0"
-            />
-
-            {/* Search */}
-            <div className="flex-1 max-w-md min-w-0">
-              <Suspense>
-                <SearchInput />
-              </Suspense>
+            {/* Search — horizontally centered between brand and auth */}
+            <div className="flex-1 flex justify-center min-w-0">
+              <div className="w-full max-w-md">
+                <Suspense>
+                  <SearchInput />
+                </Suspense>
+              </div>
             </div>
 
-            {/* Rule before auth — ml-auto pushes everything after to the right */}
-            <span
-              aria-hidden
-              className="hidden sm:block h-7 w-px bg-rule shrink-0 ml-auto"
-            />
-
-            {/* Auth — Sign In or avatar */}
+            {/* Auth — right */}
             <div className="shrink-0">
               <HeaderAuth />
             </div>
