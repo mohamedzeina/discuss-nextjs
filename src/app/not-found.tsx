@@ -2,18 +2,39 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-      <div className="text-6xl font-bold text-indigo-600 mb-2">404</div>
-      <h1 className="text-2xl font-bold text-gray-800 mb-2">Page not found</h1>
-      <p className="text-gray-500 mb-8 max-w-sm">
-        The page you&apos;re looking for doesn&apos;t exist or may have been removed.
+    <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4 py-10">
+      <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-2 mb-4">
+        Error &mdash; 404
       </p>
-      <Link
-        href="/"
-        className="px-5 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
-      >
-        Back to home
-      </Link>
+      <h1 className="font-display font-extrabold tracking-tight text-6xl sm:text-7xl text-ink leading-none">
+        Nothing{' '}
+        <span className="relative inline-block">
+          <span className="relative z-10 italic font-medium">here</span>
+          <span
+            aria-hidden
+            className="absolute inset-x-0 -bottom-1 h-3 bg-persimmon-soft -z-0 rounded-sm"
+          />
+        </span>
+        .
+      </h1>
+      <p className="mt-5 max-w-sm text-base text-ink-2 leading-relaxed">
+        The page you&apos;re looking for has been taken down, renamed, or
+        never existed in the first place.
+      </p>
+      <div className="mt-7 flex items-center gap-3">
+        <Link
+          href="/"
+          className="group inline-flex items-center gap-1.5 h-10 px-5 rounded-full bg-ink text-cream text-sm font-semibold hover:bg-persimmon active:scale-[0.98] transition-all duration-200 motion-reduce:transition-none shadow-soft"
+        >
+          <span
+            aria-hidden
+            className="transition-transform duration-200 group-hover:-translate-x-0.5 motion-reduce:transition-none"
+          >
+            &larr;
+          </span>
+          Back to the front page
+        </Link>
+      </div>
     </div>
   );
 }

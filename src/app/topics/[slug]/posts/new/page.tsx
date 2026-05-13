@@ -6,54 +6,126 @@ import FormButton from '@/components/common/formButton';
 import * as actions from '@/actions';
 import Link from 'next/link';
 import paths from '@/paths';
+import { topicTone } from '@/lib/utils';
 
 interface PostCreatePageProps {
   params: { slug: string };
 }
 
+const inputClassNames = {
+  inputWrapper:
+    'bg-cream-2/40 border border-rule data-[hover=true]:border-rule-2 group-data-[focus=true]:border-persimmon group-data-[focus=true]:bg-surface shadow-none rounded-xl h-12',
+  input: 'text-ink placeholder:text-ink-3 text-base',
+  label: 'text-ink text-xs font-semibold',
+  errorMessage: 'text-persimmon-deep text-xs font-medium',
+};
+
+const textareaClassNames = {
+  ...inputClassNames,
+  inputWrapper:
+    'bg-cream-2/40 border border-rule data-[hover=true]:border-rule-2 group-data-[focus=true]:border-persimmon group-data-[focus=true]:bg-surface shadow-none rounded-xl',
+  input: 'text-ink placeholder:text-ink-3 text-base leading-relaxed',
+};
+
 export default function PostCreatePage({ params }: PostCreatePageProps) {
   const { slug } = params;
+  const tone = topicTone(slug);
   const [formState, action] = useFormState(
     actions.createPost.bind(null, slug),
     { errors: {} }
   );
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <Link href={paths.topicShow(slug)} className="text-sm text-indigo-600 hover:underline mb-6 inline-block">
-        ← Back to #{slug}
+    <div className="max-w-2xl mx-auto py-8 sm:py-10">
+      <Link
+        href={paths.topicShow(slug)}
+        className="group inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.14em] text-ink-2 hover:text-persimmon transition-colors duration-200 motion-reduce:transition-none mb-6"
+      >
+        <span aria-hidden className="transition-transform duration-200 group-hover:-translate-x-0.5 motion-reduce:transition-none">&larr;</span>
+        Back to <span className="lowercase">#{slug}</span>
       </Link>
-      <div className="bg-white border rounded-xl shadow-sm p-6">
-        <h1 className="text-xl font-bold mb-1">Create a Post</h1>
-        <p className="text-sm text-gray-500 mb-6">Posting to <span className="text-indigo-600 font-medium">#{slug}</span></p>
-        <form action={action} className="flex flex-col gap-5">
-          <Input
-            name="title"
-            label="Title"
-            labelPlacement="outside"
-            placeholder="What's your post about?"
-            isInvalid={!!formState.errors.title}
-            errorMessage={formState.errors.title?.join(', ')}
-          />
-          <Textarea
-            name="content"
-            label="Content"
-            labelPlacement="outside"
-            placeholder="Share your thoughts, questions, or ideas..."
-            minRows={6}
-            isInvalid={!!formState.errors.content}
-            errorMessage={formState.errors.content?.join(', ')}
-          />
-          {formState.errors._form && (
-            <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-300 rounded-lg text-red-700 text-sm">
-              <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-.75-4.75a.75.75 0 001.5 0v-4.5a.75.75 0 00-1.5 0v4.5zm.75-7.5a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+
+      <div className="rounded-3xl border border-rule bg-surface shadow-soft overflow-hidden">
+        <div className={`h-1.5 ${tone.dot}`} aria-hidden />
+
+        <div className="px-6 sm:px-8 py-7 sm:py-8">
+          <div className="flex items-start gap-3">
+            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 ${tone.bg}`}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`w-5 h-5 ${tone.text}`}
+              >
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z" />
               </svg>
-              {formState.errors._form.join(', ')}
             </div>
-          )}
-          <FormButton>Publish Post</FormButton>
-        </form>
+            <div className="min-w-0">
+              <h1 className="font-display font-extrabold tracking-tight text-2xl sm:text-3xl text-ink leading-tight">
+                New post
+              </h1>
+              <p className="mt-1 text-sm text-ink-2">
+                Posting to{' '}
+                <Link
+                  href={paths.topicShow(slug)}
+                  className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${tone.bg} ${tone.text} hover:shadow-soft transition-shadow duration-200 motion-reduce:transition-none`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${tone.dot}`} />
+                  <span className="lowercase">#{slug}</span>
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          <form action={action} className="flex flex-col gap-5 mt-7">
+            <Input
+              name="title"
+              label="Title"
+              labelPlacement="outside"
+              placeholder="What's your post about?"
+              isInvalid={!!formState.errors.title}
+              errorMessage={formState.errors.title?.join(', ')}
+              classNames={inputClassNames}
+            />
+            <Textarea
+              name="content"
+              label="Content"
+              labelPlacement="outside"
+              placeholder="Share your thoughts, questions, or ideas..."
+              minRows={8}
+              isInvalid={!!formState.errors.content}
+              errorMessage={formState.errors.content?.join(', ')}
+              classNames={textareaClassNames}
+            />
+            {formState.errors._form && (
+              <div className="flex items-start gap-2 px-3 py-2.5 bg-persimmon-soft border border-persimmon/30 rounded-xl text-persimmon-deep text-sm">
+                <svg
+                  className="w-4 h-4 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm-.75-4.75a.75.75 0 001.5 0v-4.5a.75.75 0 00-1.5 0v4.5zm.75-7.5a1 1 0 100-2 1 1 0 000 2z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>{formState.errors._form.join(', ')}</span>
+              </div>
+            )}
+
+            <div className="flex items-center justify-between pt-2 border-t border-rule">
+              <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-ink-3">
+                Press publish when ready
+              </p>
+              <FormButton fullWidth={false}>Publish post</FormButton>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
