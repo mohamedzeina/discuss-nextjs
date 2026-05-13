@@ -8,6 +8,7 @@ import RelatedPosts from '@/components/posts/related-posts';
 import { Suspense } from 'react';
 import PostShowLoading from '@/components/posts/post-show-loading';
 import CommentListLoading from '@/components/comments/comment-list-loading';
+import SurfacePanel from '@/components/common/surface-panel';
 
 interface PostShowPageProps {
   params: {
@@ -86,7 +87,7 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
 
 function SidebarPanelSkeleton({ title }: { title: string }) {
   return (
-    <div className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden">
+    <SurfacePanel>
       <header className="px-4 py-3 border-b border-rule">
         <h3 className="font-display font-bold text-sm text-ink-3">{title}</h3>
       </header>
@@ -94,6 +95,6 @@ function SidebarPanelSkeleton({ title }: { title: string }) {
         <div className="h-3 w-2/3 bg-cream-2 rounded animate-pulse" />
         <div className="h-3 w-1/2 bg-cream-2 rounded animate-pulse" />
       </div>
-    </div>
+    </SurfacePanel>
   );
 }

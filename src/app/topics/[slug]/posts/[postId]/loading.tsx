@@ -1,6 +1,7 @@
 import PostShowLoading from '@/components/posts/post-show-loading';
 import CommentListLoading from '@/components/comments/comment-list-loading';
 import { Skeleton } from '@nextui-org/react';
+import SurfacePanel from '@/components/common/surface-panel';
 
 function SidebarPanelSkeleton({
   title,
@@ -10,7 +11,7 @@ function SidebarPanelSkeleton({
   rows?: number;
 }) {
   return (
-    <div className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden">
+    <SurfacePanel>
       <header className="px-4 py-3 border-b border-rule">
         <h3 className="font-display font-bold text-sm text-ink-3">{title}</h3>
       </header>
@@ -25,7 +26,7 @@ function SidebarPanelSkeleton({
           </div>
         ))}
       </div>
-    </div>
+    </SurfacePanel>
   );
 }
 
@@ -38,7 +39,7 @@ export default function PostShowPageLoading() {
         <div className="lg:col-span-8 space-y-6 min-w-0">
           <PostShowLoading />
 
-          <div className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden">
+          <SurfacePanel>
             <header className="px-5 pt-4 pb-3 border-b border-rule flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-rule-2" />
               <Skeleton className="h-4 w-40 rounded bg-cream-2" />
@@ -49,14 +50,14 @@ export default function PostShowPageLoading() {
                 <Skeleton className="h-10 w-32 rounded-full bg-cream-2" />
               </div>
             </div>
-          </div>
+          </SurfacePanel>
 
           <CommentListLoading />
         </div>
 
         <aside className="lg:col-span-4">
           <div className="space-y-5">
-            <div className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden">
+            <SurfacePanel>
               <header className="px-4 py-3 border-b border-rule">
                 <h3 className="font-display font-bold text-sm text-ink-3">
                   Author
@@ -75,7 +76,7 @@ export default function PostShowPageLoading() {
                   <Skeleton className="h-14 rounded-xl bg-cream-2" />
                 </div>
               </div>
-            </div>
+            </SurfacePanel>
             <SidebarPanelSkeleton title="Thread map" rows={3} />
             <SidebarPanelSkeleton title="More in topic" rows={3} />
           </div>

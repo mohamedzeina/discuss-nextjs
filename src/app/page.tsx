@@ -4,6 +4,7 @@ import TopicCreateForm from '@/components/topics/topic-create-form';
 import TopicList from '@/components/topics/topic-list';
 import { fetchRecentPosts } from '@/db/queries/posts';
 import PostFeed from '@/components/posts/post-feed';
+import SurfacePanel from '@/components/common/surface-panel';
 import { auth } from '@/auth';
 import { db } from '@/db';
 
@@ -237,7 +238,7 @@ function SidebarPanel({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden">
+    <SurfacePanel as="section">
       <header className="flex items-baseline justify-between px-4 pt-3.5 pb-2.5">
         <div className="flex items-center gap-2">
           <span
@@ -255,7 +256,7 @@ function SidebarPanel({
       </header>
       <Divider className="bg-rule" />
       <div className="p-4">{children}</div>
-    </section>
+    </SurfacePanel>
   );
 }
 

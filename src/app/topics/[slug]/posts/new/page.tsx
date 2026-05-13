@@ -7,6 +7,7 @@ import * as actions from '@/actions';
 import Link from 'next/link';
 import paths from '@/paths';
 import { topicTone } from '@/lib/utils';
+import SurfacePanel from '@/components/common/surface-panel';
 import {
   inputClassNamesLg as inputClassNames,
   textareaClassNamesLg as textareaClassNames,
@@ -34,7 +35,7 @@ export default function PostCreatePage({ params }: PostCreatePageProps) {
         Back to <span className="lowercase">#{slug}</span>
       </Link>
 
-      <div className="rounded-3xl border border-rule bg-surface shadow-soft overflow-hidden">
+      <SurfacePanel size="lg">
         <div className={`h-1.5 ${tone.dot}`} aria-hidden />
 
         <div className="px-6 sm:px-8 py-7 sm:py-8">
@@ -115,7 +116,7 @@ export default function PostCreatePage({ params }: PostCreatePageProps) {
             </div>
           </form>
         </div>
-      </div>
+      </SurfacePanel>
     </div>
   );
 }

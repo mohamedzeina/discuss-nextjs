@@ -1,4 +1,5 @@
 import { fetchCommentsByPostId } from '@/db/queries/comments';
+import SurfacePanel from '@/components/common/surface-panel';
 
 interface ThreadMapProps {
   postId: string;
@@ -16,10 +17,7 @@ export default async function ThreadMap({ postId }: ThreadMapProps) {
   }));
 
   return (
-    <section
-      aria-label="Thread map"
-      className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden"
-    >
+    <SurfacePanel as="section" aria-label="Thread map">
       <header className="px-4 py-3 border-b border-rule flex items-baseline justify-between">
         <h3 className="font-display font-bold text-sm text-ink">Thread map</h3>
         <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-2">
@@ -53,6 +51,6 @@ export default async function ThreadMap({ postId }: ThreadMapProps) {
           </li>
         ))}
       </ol>
-    </section>
+    </SurfacePanel>
   );
 }

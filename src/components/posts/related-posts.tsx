@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { db } from '@/db';
 import paths from '@/paths';
 import { timeAgo } from '@/lib/utils';
+import SurfacePanel from '@/components/common/surface-panel';
 
 interface RelatedPostsProps {
   postId: string;
@@ -28,10 +29,7 @@ export default async function RelatedPosts({
   if (posts.length === 0) return null;
 
   return (
-    <section
-      aria-label="More in this topic"
-      className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden"
-    >
+    <SurfacePanel as="section" aria-label="More in this topic">
       <header className="px-4 py-3 border-b border-rule flex items-baseline justify-between">
         <h3 className="font-display font-bold text-sm text-ink">
           More in <span className="lowercase">#{topicSlug}</span>
@@ -71,6 +69,6 @@ export default async function RelatedPosts({
           </li>
         ))}
       </ol>
-    </section>
+    </SurfacePanel>
   );
 }

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Textarea } from '@nextui-org/react';
 import FormButton from '@/components/common/formButton';
 import * as actions from '@/actions';
+import SurfacePanel from '@/components/common/surface-panel';
 import { inputClassNames as textareaClassNames } from '@/lib/form-classes';
 
 interface CommentCreateFormProps {
@@ -90,10 +91,7 @@ export default function CommentCreateForm({
 
   if (startOpen) {
     return (
-      <section
-        aria-label="Leave a reply"
-        className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden"
-      >
+      <SurfacePanel as="section" aria-label="Leave a reply">
         <header className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-rule">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-persimmon" />
@@ -106,7 +104,7 @@ export default function CommentCreateForm({
           </span>
         </header>
         <div className="p-5">{form}</div>
-      </section>
+      </SurfacePanel>
     );
   }
 

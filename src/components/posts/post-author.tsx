@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { fetchPostById } from '@/db/queries/posts';
 import { db } from '@/db';
+import SurfacePanel from '@/components/common/surface-panel';
 
 interface PostAuthorProps {
   postId: string;
@@ -16,10 +17,7 @@ export default async function PostAuthor({ postId }: PostAuthorProps) {
   ]);
 
   return (
-    <section
-      aria-label="About the author"
-      className="rounded-2xl border border-rule bg-surface shadow-soft overflow-hidden"
-    >
+    <SurfacePanel as="section" aria-label="About the author">
       <header className="px-4 py-3 border-b border-rule flex items-baseline justify-between">
         <h3 className="font-display font-bold text-sm text-ink">Author</h3>
         <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-2">
@@ -57,7 +55,7 @@ export default async function PostAuthor({ postId }: PostAuthorProps) {
           <Stat label="replies" value={userReplyCount} />
         </div>
       </div>
-    </section>
+    </SurfacePanel>
   );
 }
 

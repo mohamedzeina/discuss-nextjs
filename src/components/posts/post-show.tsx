@@ -7,6 +7,7 @@ import DeleteButton from '@/components/common/delete-button';
 import { fetchPostById } from '@/db/queries/posts';
 import paths from '@/paths';
 import { topicTone, timeAgo } from '@/lib/utils';
+import SurfacePanel from '@/components/common/surface-panel';
 
 interface PostShowProps {
   postId: string;
@@ -32,7 +33,7 @@ export default async function PostShow({ postId }: PostShowProps) {
   const isOwner = session?.user?.id === post.userId;
 
   return (
-    <article className="rounded-3xl border border-rule bg-surface shadow-soft overflow-hidden">
+    <SurfacePanel as="article" size="lg">
       {/* Tone band that ties the post to its topic */}
       <div className={`h-1.5 ${tone.dot}`} aria-hidden />
 
@@ -96,6 +97,6 @@ export default async function PostShow({ postId }: PostShowProps) {
           {post.content}
         </p>
       </div>
-    </article>
+    </SurfacePanel>
   );
 }

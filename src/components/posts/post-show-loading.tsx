@@ -1,8 +1,9 @@
 import { Skeleton } from '@nextui-org/react';
+import SurfacePanel from '@/components/common/surface-panel';
 
 export default function PostShowLoading() {
   return (
-    <div className="rounded-3xl border border-rule bg-surface shadow-soft overflow-hidden">
+    <SurfacePanel size="lg">
       <div className="h-1.5 bg-cream-2" />
       <div className="px-6 sm:px-8 py-7 sm:py-8">
         <Skeleton className="h-6 w-24 rounded-full mb-4 bg-cream-2" />
@@ -20,6 +21,6 @@ export default function PostShowLoading() {
           <Skeleton className="h-4 w-3/4 rounded bg-cream-2" />
         </div>
       </div>
-    </div>
+    </SurfacePanel>
   );
 }
